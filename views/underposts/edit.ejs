@@ -1,0 +1,37 @@
+<% include ../partials/headero %>
+<br>
+<div class="container" id="addUnderpost">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" style="border: #1a1a1a">
+                <div class="card-body" style="background-color: #1a1a1a">
+                    <div class="card-title info text-center">Edytuj podpost o tytule <%= underpost.title %></div>
+                   
+                    <form action="/news/<%= news_id %>/underposts/<%= underpost._id %>?_method=PUT" method="post">
+                       
+                        <p class="info2">Edytuj tytuł podposta</p>
+                        <input type="text" name="underpost[title]" value="<%= underpost.title %>" placeholder="Tytuł podposta" class="form-control">
+                        <br>
+                        <p class="info2">Edytuj opis podposta</p>
+                        <textarea class="form-control" name="underpost[opis]" id="description" placeholder="Opis podposta"><%= underpost.opis %></textarea>
+                        <br>
+                        
+                        <br>
+                        <input type="submit" class="info2" value="Edytuj podpost" style="background: none; border: 1px solid #FBFA04; padding: 10px; border-radius: 0.3em; font-size: 15px;">
+                    </form>
+                    <br>
+                    <ul class="info2">
+                        Poradnik formatowania tekstu:
+                        <li>pogrubienie -  <pre style="color:#FBFA04"> <code> <span> &lt;strong&gt; wyraz lub wyrażenie &lt;/strong&gt; </span> </code>  </pre></li>
+                        <li>pochylenie -  <pre style="color:#FBFA04"> <code> <span> &lt;em&gt; wyraz lub wyrażenie &lt;/em&gt; </span> </code>  </pre></li>
+                        <li>podkreślenie -  <pre style="color:#FBFA04"> <code> <span> &lt;ins&gt; wyraz lub wyrażenie &lt;/ins&gt; </span> </code>  </pre></li>
+                        <li>przekreślenie -  <pre style="color:#FBFA04"> <code> <span> &lt;del&gt; wyraz lub wyrażenie &lt;/del&gt; </span> </code>  </pre></li>
+                        <li>akapity -  <pre style="color:#FBFA04"> <code> <span> &lt;br&gt; </span> </code>  </pre></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>

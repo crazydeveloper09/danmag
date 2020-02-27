@@ -1,0 +1,60 @@
+<% include ./partials/header %>
+<br>
+      <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                    <h1 class="info text-center">Najnowsze aktualności</h1>
+            </div>
+		
+			
+		</div>	
+		<% if(error.length > 0){ %>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="alert alert-danger" role="alert">
+						<%= error %>
+					</div>
+				</div>
+			</div>
+			
+		<% } %>
+            
+               
+                            <% if(news.length===0){ %>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                            <p class="neutral text-center">Nie mamy nowinek</p>
+                                    </div>
+                                </div>
+                               
+                               
+                            <% } else { %>
+								<div class="row">
+									<% for(let i=news.length-1;i>news.length-4;i--){ %>
+										<div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 8px">
+											<div class="card" style="border: #1a1a1a;background-color: #1a1a1a">
+												
+													<% if(typeof news[i].profile !== 'undefined'){ %>
+														<img src="<%= news[i].profile %>" alt="<%= news[i].title %> zdjęcie główne" class="card-img-top">
+													<% } %>
+												<br>
+													<div class="card-title info text-center">
+															<a href="/news/<%= news[i]._id %>" style="color:#FBFA04"><%= news[i].title %></a> 
+														</div>
+												<div class="card-body" style="background-color: #1a1a1a">
+														<p class="neutral"><%- news[i].opis %></p>
+														<% if(news[i].opis.length>200){ %>
+															<a href="/news/<%= news[i]._id %>" class="info2" style="font-size: 15px;">Czytaj więcej...</a>
+														<% } %>
+												</div>
+											</div>
+										</div>
+									<% } %>
+								</div>
+                            <% } %>
+               
+                   
+            </div>
+           
+
+<% include ./partials/footer %>

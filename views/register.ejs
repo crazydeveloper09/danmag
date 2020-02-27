@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	
+
+<head>
+	<title> <%= header %> </title>
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="sklep motoryzacyjny głogów, części samochodowe głogów, auto części głogów, naprawa przewodów hydraulicznych, regeneracja przewodów hamulcowych, zakuwanie przewodów samochodowych, danmag, danmag głogów, sklep motoryzacyjny, auto części">	
+	<meta name="description" content="PPHU „Danmag” Auto Części. ul.Mickiewicza 53b 67-200 Głogów. tel 76 8333595 tel/fax 76 8356252. e-mail: danmag@danmag.pl.">
+	<meta charset="utf-8">
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/b2ec1cb26d.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-12" style="margin-top:20%">
+                     
+                        <h1 class="info text-center">Rejestracja do strony Danmag</h1>
+						<% if(error.length > 0){ %>
+							<div class="alert alert-danger" role="alert">
+								<%= error %>
+							</div>
+						<% } %>
+                        <form action="/register" method="post">
+                            <input type="text" name="username" class="form-control" placeholder="Nazwa użytkownika">
+                            <br>
+                            <input type="password" name="password" class="form-control" placeholder="Hasło">
+                            <br>
+                            <input type="submit" value="Zarejestruj się" class="btn btn-warning">
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+</body>
+</html>

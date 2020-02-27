@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	
+
+<head>
+	<title> Danmag - części i akcesoria motoryzacyjne - nowa informacja </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/b2ec1cb26d.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	
+	<nav class="navbar navbar-expand-lg navbar-dark bg-gray">
+	    <div class="container">
+            <a class="navbar-brand" href="/"><img src="/logo.png" height=40></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" id="news">Dodaj aktualność</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" id="newsPhoto">Dodaj zdjęcie do nowinki</a>
+                    </li>    
+                    <li class="nav-item">
+                        <a class="nav-link" id="editPhoto">Edytuj zdjęcie do nowinki</a>
+                    </li>    
+                </ul>
+            
+            </div>	
+	    </div>	
+    </nav>
+    <br>
+		<div class="container" id="addNews">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="card" style="border: #1a1a1a">
+						<div class="card-body" style="background-color: #1a1a1a">
+                            <div class="card-title info text-center">Dodaj aktualność</div>
+                            <form action="/news" method="post" enctype="multipart/form-data">
+                                <p class="info2">Wpisz tytuł aktualości</p>
+                                <input type="text" name="title" placeholder="Tytuł aktualności" class="form-control">
+                                <br>
+                                <p class="info2">Wpisz opis tytuł aktualności</p>
+                                <textarea class="form-control" name="description" id="description" placeholder="Opis aktualności"></textarea>
+                                <br>
+                                <p class="info2">Zdjęcie główne</p>
+                                <input type="file" name="profile" style="color: #FBFA04">
+                                <br>
+                                <br>
+                                <input type="submit" class="info2" value="Dodaj aktualność" style="background: none; border: 1px solid #FBFA04; padding: 10px; border-radius: 0.3em;font-size: 15px;">
+                            </form>
+							<br>
+							<ul class="info2">
+								Poradnik formatowania tekstu:
+								<li>pogrubienie -  <pre style="color:#FBFA04"> <code> <span> &lt;strong&gt; wyraz lub wyrażenie &lt;/strong&gt; </span> </code>  </pre></li>
+								<li>pochylenie -  <pre style="color:#FBFA04"> <code> <span> &lt;em&gt; wyraz lub wyrażenie &lt;/em&gt; </span> </code>  </pre></li>
+								<li>podkreślenie -  <pre style="color:#FBFA04"> <code> <span> &lt;ins&gt; wyraz lub wyrażenie &lt;/ins&gt; </span> </code>  </pre></li>
+								<li>przekreślenie -  <pre style="color:#FBFA04"> <code> <span> &lt;del&gt; wyraz lub wyrażenie &lt;/del&gt; </span> </code>  </pre></li>
+								<li>akapity -  <pre style="color:#FBFA04"> <code> <span> &lt;br&gt; </span> </code>  </pre></li>
+							</ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+            <div class="container" id="addNewsPhoto">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card" style="border: #1a1a1a">
+                                <div class="card-body" style="background-color: #1a1a1a">
+                                    <div class="card-title info text-center">Dodaj zdjęcie do newsa</div>
+                                    <form action="/news/new/picture" method="post" enctype="multipart/form-data">
+                                        <p class="info2">Wybierz post</p>
+                                        <select name="title" class="form-control" style="border-left: none;border-right: none;border-top: none;border-bottom: 1px solid #FBFA04;background: none;color: #FBFA04">
+                                            <% for(i=0; i<news.length; i++){ %>
+                                                <option style="color:black"><%= news[i].title %></option>
+                                            <% } %>
+                                        </select>
+                                        <br>
+                                        <p class="info2">Zdjęcie</p>
+                                        <input type="file" name="picture" style="color: #FBFA04">
+                                        <br>
+                                        <br>
+                                        <input type="submit" class="info2" value="Dodaj zdjęcie do newsa" style="background: none; border: 1px solid #FBFA04; padding: 10px; border-radius: 0.3em;font-size: 15px;">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container" id="editNewsPhoto">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card" style="border: #1a1a1a">
+                                <div class="card-body" style="background-color: #1a1a1a">
+                                    <div class="card-title info text-center">Edytuj zdjęcie do newsa</div>
+                                    <form action="/news/edit/picture" method="post" enctype="multipart/form-data">
+                                        <p class="info2">Wybierz post</p>
+                                        <select name="title" class="form-control" style="border-left: none;border-right: none;border-top: none;border-bottom: 1px solid #FBFA04;background: none;color: #FBFA04">
+                                            <% for(i=0; i<news.length; i++){ %>
+                                                <option style="color:black"><%= news[i].title %></option>
+                                            <% } %>
+                                        </select>
+                                        <br>
+                                        <p class="info2">Zdjęcie</p>
+                                        <input type="file" name="picture" style="color: #FBFA04">
+                                        <br>
+                                        <br>
+                                        <input type="submit" class="info2" value="Edytuj zdjęcie do newsa" style="background: none; border: 1px solid #FBFA04; padding: 10px; border-radius: 0.3em;font-size: 15px;">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            <script>
+                $("#addUnderpost").hide();
+                $("#addNewsPhoto").hide();
+                $("#addUnderpostsPhoto").hide();
+                $("#editNewsPhoto").hide();
+                $("#underpost").on('click', function(){
+                    $("#addUnderpost").show();
+                    $("#addNews").hide();
+                    $("#addNewsPhoto").hide();
+                    $("#addUnderpostsPhoto").hide();
+                    $("#editNewsPhoto").hide();
+                });
+                $("#news").on('click', function(){
+                    $("#addUnderpost").hide();
+                    $("#addNews").show();
+                    $("#addNewsPhoto").hide();
+                    $("#addUnderpostsPhoto").hide();
+                    $("#editNewsPhoto").hide();
+                });
+                $("#underpostPhoto").on('click', function(){
+                    $("#addUnderpost").hide();
+                    $("#addNews").hide();
+                    $("#addNewsPhoto").hide();
+                    $("#addUnderpostsPhoto").show();
+                    $("#editNewsPhoto").hide();
+                });
+                $("#newsPhoto").on('click', function(){
+                    $("#addUnderpost").hide();
+                    $("#addNews").hide();
+                    $("#addNewsPhoto").show();
+                    $("#addUnderpostsPhoto").hide();
+                    $("#editNewsPhoto").hide();
+                });
+                $("#editPhoto").on('click', function(){
+                    $("#addUnderpost").hide();
+                    $("#addNews").hide();
+                    $("#addNewsPhoto").hide();
+                    $("#addUnderpostsPhoto").hide();
+                    $("#editNewsPhoto").show();
+                });
+            </script>
+</body>
+</html>

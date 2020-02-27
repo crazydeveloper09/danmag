@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+	
+
+<head>
+	<title> <%= header %> </title>
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="sklep motoryzacyjny głogów, części samochodowe głogów, auto części głogów, 
+	naprawa przewodów hydraulicznych, regeneracja przewodów hamulcowych, zakuwanie przewodów samochodowych,
+	 danmag, danmag głogów, sklep motoryzacyjny, auto części, akumulatory, akumulatory głogów, oleje silnikowe głogów, 
+	 oleje silnikowe, przewody hamulcowe, przewody hamulcowe głogów">	
+	<meta name="description" content="PPHU „Danmag” Auto Części. ul.Mickiewicza 53b 67-200 Głogów. tel 76 8333595 tel/fax 76 8356252. e-mail: danmag@danmag.pl.">
+	<meta charset="utf-8">
+	<meta name="theme-color" content="#1a1a1a">
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/b2ec1cb26d.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/style.css">
+ <script>
+	 var numer = Math.floor(Math.random()*3)+1;
+           
+		   var timer1 = 0;
+		   var timer2 = 0;
+		  
+		   function ustawslajd(nrslajdu)
+		   {
+			   clearTimeout(timer1);
+			   clearTimeout(timer2);
+			   numer = nrslajdu - 1;
+			  
+			   schowaj();
+			   setTimeout("zmienslajd()", 500);
+			  
+		   }
+		  
+		   function schowaj()
+		   {
+			   $("#slider").fadeOut(500);
+		   }
+	  
+		   function zmienslajd()
+		   {
+			   numer++; if (numer>3) numer=1;
+			  
+			  
+			   
+			   $("#slider").attr("src", "/slide" + numer + ".jpg")
+			   $("#slider").fadeIn(500);
+			  
+			   timer1 = setTimeout("zmienslajd()", 7000);
+			   timer2 = setTimeout("schowaj()", 6500);
+		  
+		   }
+ </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</head>
+
+<body onload="zmienslajd()"> 
+	
+	
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-gray">
+	<div class="container">
+		 <a class="navbar-brand" href="/"><img src="/logo.png" id="nav"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border:none;">
+    <span class="navbar-toggler-icon" style="color:#FBFA04"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto text-center">
+        <% if(typeof main !== 'undefined'){ %>
+			<li class="nav-item">
+        		<a class="nav-link" href="/" style="color:#FBFA04"><i class="fas fa-home"></i> Home</a>
+      		</li>
+		<% } else { %>
+			<li class="nav-item">
+        		<a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+      		</li>
+		<% } %>
+		<% if(typeof about !== 'undefined'){ %>
+			<li class="nav-item">
+        		<a class="nav-link" href="/about" style="color:#FBFA04"><i class="fas fa-address-card"></i> O firmie</a>
+      		</li>
+		<% } else { %>
+			<li class="nav-item">
+        		<a class="nav-link" href="/about"><i class="fas fa-address-card"></i> O firmie</a>
+      		</li>
+		<% } %>
+      
+		
+      
+		<% if(typeof zakuwanie !== 'undefined'){ %>
+			 <li class="nav-item">
+        		<a class="nav-link" href="/zakuwanie" style="color:#FBFA04"><i class="fas fa-tools"></i> Zakuwanie przewodów</a>
+        
+      		</li>
+		<% } else { %>
+			 <li class="nav-item">
+        		<a class="nav-link" href="/zakuwanie"><i class="fas fa-tools"></i> Zakuwanie przewodów</a>
+        
+     		 </li>
+		<% } %>
+     
+		<% if(typeof contact !== 'undefined'){ %>
+			<li class="nav-item">
+        		<a class="nav-link" href="/contact" style="color:#FBFA04"><i class="fas fa-address-book"></i> Kontakt</a>
+      		</li>
+		<% } else { %>
+			<li class="nav-item">
+        		<a class="nav-link" href="/contact"><i class="fas fa-address-book"></i> Kontakt</a>
+      		</li>
+		<% } %>
+      <% if(typeof newse !== 'undefined'){ %>
+			<li class="nav-item">
+        		<a class="nav-link" href="/news" style="color:#FBFA04"><i class="fas fa-newspaper"></i> Aktualności</a>
+      		</li>
+		<% } else { %>
+			<li class="nav-item">
+        		<a class="nav-link" href="/news"><i class="fas fa-newspaper"></i> Aktualności</a>
+      		</li>
+		<% } %>
+		<% if(typeof bsearch !== 'undefined'){ %>
+			<li class="nav-item">
+        		<a class="nav-link" href="/batteries/search" style="color:#FBFA04"><i class="fas fa-search"></i> Wyszukiwarka akumulatorów</a>
+      		</li>
+		<% } else { %>
+			<li class="nav-item">
+				<a class="nav-link" href="/batteries/search"><i class="fas fa-search"></i> Wyszukiwarka akumulatorów</a>
+			</li>
+		<% } %>
+		<% if(typeof currentUser !== 'undefined'){ %>
+			<li class="nav-item">
+				<a class="nav-link" href="/news/new">Dodaj nowinkę</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/logout">Wyloguj się</a>
+			</li>
+		<% } %>
+    </ul>
+   
+  </div>	
+	</div>	
+ 
+	
+	
+</nav>
+<br>
+	<br>
+	<br>
+	<br>
+	
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-12">
+				
+				<div class="card" style="border: none">
+					<img src="" id="slider" class="card-img-top" />
+				</div>
+					  
+					
+				
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="container">
+	
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card" style="border: #1a1a1a">
+          <div class="card-body" style="background-color: #1a1a1a">
+            <div class="card-title info"><i class="fas fa-tools"></i> Prowadzimy usługę zakuwania przewodów hamulcowych</div>
+            <p class="info2" style="font-size: 15px;">Wykonujemy następujące przewody hamulcowe zgodne z D.O.T:</p>
+            <ul>
+              <li class="info2" style="font-size: 15px;">Miedziane i miedziano-niklowe</li>
+              <li class="info2" style="font-size: 15px;">Gumowe 1/8 DN z podwójnym zbrojeniem z włókna syntetycznego Sae J1401</li>
+              <li class="info2" style="font-size: 15px;">Teflonowe 1/8 DN w oplocie ze stali nierdzewnej</li>
+            </ul>
+            <p class="info2" style="font-size: 15px;">Wszystkie przewody są atestowane i wykonane zgodnie z międzynarodowymi
+              normami. Jesteśmy oficjalnym partnerem amerykańskiego producenta
+              węży i końcówek hamulcowych Brake Quip.
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

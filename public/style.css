@@ -1,0 +1,105 @@
+.navbar {
+	background-color: #1a1a1a;
+}
+
+#name {
+	color: #FBFA04;
+	text-transform: uppercase;
+}
+
+body {
+	background-color: #262625;
+}
+.info {
+	font-family: 'Nunito', sans-serif;
+	color: #FBFA04;
+	font-size: 20px;
+	
+}
+#nav {
+	height: 40px;
+}
+.info2 {
+	font-family: 'Nunito', sans-serif;
+	color: #FBFA04;
+	font-size: 18px;
+	
+}
+
+#description {
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	border-bottom: 1px solid #FBFA04;
+	background: none;
+	color: #FBFA04;
+}
+#description::placeholder {
+	color: #FBFA04;
+}
+input[type=text],
+input[type=password],
+input[type=search] {
+	background: none;
+	border-bottom:1px solid #FBFA04;
+	border-left:none;
+	border-right:none;
+	border-top:none;
+	color: #FBFA04;
+  }
+  
+  input[type=text]::placeholder,
+  input[type=password]::placeholder,
+  input[type=search]::placeholder {
+	color:#FBFA04;
+  }
+.alert2 {
+	border:2px solid #FBFA04;
+	color: #FBFA04;
+	text-align:center;
+	padding: 5px;
+	border-radius: 5%;
+}
+
+.neutral {
+	font-family: 'Nunito', sans-serif;
+	color: white;
+	font-size: 15px;
+}
+
+.nav-link {
+	font-family: 'Nunito', sans-serif;
+	text-transform: uppercase;
+}
+
+.neutralb {
+	font-family: 'Nunito', sans-serif;
+	color: white;
+	font-size: 18px;
+}
+.footer {
+	font-family: 'Nunito', sans-serif;
+	color: white;
+	font-size: 13px;
+}
+.navbar-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(251,251,4, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+@media (min-width: 576px){
+	#nav {
+		height: 40px;
+	}
+}
+
+@media (min-width: 768px){
+	#nav {
+		height: 55px;
+	}
+}
+
+@media (min-width: 992px){
+	#nav {
+		height: 70px;
+	}
+}

@@ -1,0 +1,70 @@
+<% include ./partials/headero %>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            
+            <div id="zap_remote">
+                <link rel="stylesheet" href="/sznajder_remote.css" type="text/css" />
+              <div class="card" style="background: #1a1a1a;">
+                  <div class="card-title info text-center">
+                      <br>
+                      Wyszukiwarka akumulatorów Sznajder
+                  </div>
+                  <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="pojemnik">
+                                <label for="category text-center">kategoria:</label>
+                                <select id="category" class="zap_drop_down" name="category">
+                                    <option value="" style="color: black;">--</option>               
+                                </select>
+                            </div>  
+                        </div>
+                      </div>  
+                      <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="pojemnik">
+                                <label for="model text-center">model:</label>
+                                <select id="model" class="zap_drop_down" name="model">
+                                    <option value="" style="color: black;">--</option>   
+                                </select>
+                            </div>    
+                        </div>
+                      </div>  
+                      <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="pojemnik">  
+                                <label for="series text-center">seria:</label>
+                                <select id="series" class="zap_drop_down" name="series">
+                                    <option value="" style="color: black;">--</option>   
+                                </select>
+                            </div> 
+                        </div>
+                      </div>  
+                      
+                        
+                  </div>
+              </div>  
+                
+             
+              
+                
+                
+                <div style="clear: both">
+                </div>
+                
+              </div>
+              
+              <table class="table-bordered table-striped table-hover" id="rezultaty">
+              </table>
+        </div>
+    </div>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+<script>
+var jq191 = jQuery.noConflict();
+</script>
+<script type="text/javascript" src="/sznajder_remote.js"></script>  
+<% include ./partials/footer %>

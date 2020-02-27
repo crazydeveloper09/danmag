@@ -1,0 +1,83 @@
+<% include ../partials/headero %>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" style="background-color: #1a1a1a">
+                <% if(typeof news.profile !== 'undefined'){ %>
+                    <img src="<%= news.profile %>" alt="<%= news.title %> zdjęcie główne" class="card-img-top">
+            <% } %>
+                   
+               
+            <div class="card-title info text-center">
+                <br>
+                <%= news.title %>
+            </div>
+                <div class="card-body">
+                   
+                    
+                  
+                    <p class="neutralb"><%- news.opis %></p>
+                    <% if(typeof currentUser !== 'undefined'){ %>
+                       <div class="d-inline">
+                           <a href="/news/<%= news._id %>/underposts/new" class="btn btn-primary">Dodaj podpost</a>
+                           <a href="/news/<%= news._id %>/edit" class="btn btn-warning">Edytuj</a>
+                           <a href="/news/<%= news._id %>/delete" class="btn btn-danger">Usuń</a>
+                       </div>
+                    <% } %>
+                    <% if(news.pictures.length ===0){ %>
+
+                    <% } else { %>
+					   <p class="info">Galeria</p>
+                        <% for(let j=0;j<news.pictures.length;j++){ %>
+                            <div class="col-lg-4 col-md-12">
+                                <img src="<%= news.pictures[j] %>" class="img-thumbnail">
+                            </div>
+                        <% } %>
+                    <% } %>
+                    <br>
+                    <% if(news.underposts.length !==0){ %>
+                        <% for(var i=0; i<news.underposts.length; i++){ %>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-6 col-md-12">
+									<% if(news.underposts[i].title.length >0){ %>
+										<div class="card-title info text-center"><%= news.underposts[i].title %></div>
+									<% } %>
+									<% if(news.underposts[i].profile.length >0){ %>
+										<img src="<%= news.underposts[i].profile %>" class="card-img-top">
+									<% } %>
+                                    
+                                    
+                                 
+                                </div>
+                            </div>
+							<br>
+                            <p class="neutralb"><%= news.underposts[i].opis %></p>
+                            <% if(typeof currentUser !== 'undefined'){ %>
+                                <div class="d-inline">
+                                   
+                                    <a href="/news/<%= news._id %>/underposts/<%= news.underposts[i]._id %>/edit" class="btn btn-secondary">Edytuj podpost</a>
+                                    <a href="/news/<%= news._id %>/underposts/<%= news.underposts[i]._id %>/delete" class="btn btn-dark">Usuń podpost</a>
+                                </div>
+                             <% } %>
+                             <% if(news.underposts[i].title === "Valvoline SynPower - dla silników o dużej mocy"){ %>
+						<ul class="info2">
+							<li>Specjalne dodatki redukują tarcie, zapewniając maksymalną moc</li>
+							<li>Ulepszona ochrona przy zimnym rozruchu i w wysokich temperaturach</li>
+							<li>Minimalizacja osadów w celu uzyskania ponadprzeciętnej czystości silnika</li>
+							<li>Doskonała ochrona przed zużywaniem przy wydłużonych interwałach wymiany oleju</li>
+							<li>Unikalne dodatki chemiczne zmniejszają emisje spalin i zużycie paliwa</li>
+							<li>Przekraczanie aktualnych wymagań praktycznie wszystkich wiodących producentów samochodów</li>
+					</ul>
+					<% } %>
+                                
+                        <% } %>
+
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>
