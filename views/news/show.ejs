@@ -20,9 +20,9 @@
                     <p class="neutralb"><%- news.opis %></p>
                     <% if(typeof currentUser !== 'undefined'){ %>
                        <div class="d-inline">
-                           <a href="/news/<%= news._id %>/underposts/new" class="btn btn-primary">Dodaj podpost</a>
-                           <a href="/news/<%= news._id %>/edit" class="btn btn-warning">Edytuj</a>
-                           <a href="/news/<%= news._id %>/delete" class="btn btn-danger">Usuń</a>
+                           <a href="/news/<%= news.more %>/underposts/new" class="btn btn-primary">Dodaj podpost</a>
+                           <a href="/news/<%= news.more %>/edit" class="btn btn-warning">Edytuj</a>
+                           <a href="/news/<%= news.more %>/delete" class="btn btn-danger">Usuń</a>
                        </div>
                     <% } %>
                     <% if(news.pictures.length ===0){ %>
@@ -56,8 +56,8 @@
                             <% if(typeof currentUser !== 'undefined'){ %>
                                 <div class="d-inline">
                                    
-                                    <a href="/news/<%= news._id %>/underposts/<%= news.underposts[i]._id %>/edit" class="btn btn-secondary">Edytuj podpost</a>
-                                    <a href="/news/<%= news._id %>/underposts/<%= news.underposts[i]._id %>/delete" class="btn btn-dark">Usuń podpost</a>
+                                    <a href="/news/<%= news.more %>/underposts/<%= news.underposts[i]._id %>/edit" class="btn btn-secondary">Edytuj podpost</a>
+                                    <a href="/news/<%= news.more %>/underposts/<%= news.underposts[i]._id %>/delete" class="btn btn-dark">Usuń podpost</a>
                                 </div>
                              <% } %>
                              <% if(news.underposts[i].title === "Valvoline SynPower - dla silników o dużej mocy"){ %>

@@ -60,7 +60,8 @@ const newsSchema = new mongoose.Schema({
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "UnderPost"
 		}
-	]
+	],
+	more: String
 });
 
 let News = mongoose.model("News", newsSchema);
@@ -93,7 +94,7 @@ app.get("/", function(req, res){
 		if(err) {
 			console.log(err);
 		} else {
-			console.log(news.length);
+			
 			res.render("index" , {news:news, header: "Danmag-części i akcesoria motoryzacyjne | Start", main:"", currentUser: req.user});
 		}
 	});
@@ -208,7 +209,8 @@ app.post("/news", upload.single('profile'), function(req, res){
 				profile: result.secure_url,
 				opis: req.body.description,
 				pictures: [],
-				underposts: []
+				underposts: [],
+				more: req.body.title.toLowerCase().split(' ').join('-')
 			});
 			News.create(newNews, function(err, createdNews) {
 				if(err) {
@@ -224,7 +226,8 @@ app.post("/news", upload.single('profile'), function(req, res){
 				title:req.body.title,
 				opis: req.body.description,
 				pictures: [],
-				underposts: []
+				underposts: [],
+				more: req.body.title.toLowerCase().split(' ').join('-')
 			});
 			News.create(newNews, function(err, createdNews) {
 				if(err) {
@@ -249,7 +252,7 @@ app.post("/news/edit/picture", upload.single("picture"), function(req, res){
                news.profile = result.secure_url;
               
                news.save();
-                res.redirect("/news/" +news._id);
+                res.redirect("/news/" +news.more);
             }
         });
     });
@@ -257,7 +260,7 @@ app.post("/news/edit/picture", upload.single("picture"), function(req, res){
 });
 
 app.get("/news/:id/edit", isLoggedIn, function(req, res){
-	News.findById(req.params.id, function(err, news){
+	News.findOne({more:req.params.id}, function(err, news){
 		if(err) {
 			console.log(err);
 		} else {
@@ -268,11 +271,11 @@ app.get("/news/:id/edit", isLoggedIn, function(req, res){
 });
 
 app.get("/news/:id", function(req, res){
-	News.findById(req.params.id).populate("underposts").exec(function(err, news){
+	News.findOne({more:req.params.id}).populate("underposts").exec(function(err, news){
 		if(err) {
 			console.log(err);
 		} else {
-			console.log(news);
+			
 			res.render("./news/show", {news: news, header: "Danmag-części i akcesoria motoryzacyjne | " + news.title, currentUser: req.user});
 		}
 	});
@@ -283,7 +286,9 @@ app.put("/news/:id", isLoggedIn, function(req, res){
 		if(err) {
 			console.log(err);
 		} else {
-			res.redirect("/news/" + req.params.id);
+			updatedNews.more = updatedNews.title.toLowerCase().split(' ').join('-');
+			updatedNews.save();
+			res.redirect("/news/" + updatedNews.more);
 		}
 	});
 });
@@ -366,7 +371,7 @@ app.post("/underposts/:news_id", upload.single('profile') ,function(req, res) {
 						console.log(findedNews);
 						findedNews.underposts.push(createdUnderPost);
 						findedNews.save();
-						res.redirect("/news/" + findedNews._id);
+						res.redirect("/news/" + findedNews.more);
 					}
 				});
 				
@@ -391,7 +396,7 @@ app.post("/underposts/:news_id", upload.single('profile') ,function(req, res) {
 						console.log(findedNews);
 						findedNews.underposts.push(createdUnderPost);
 						findedNews.save();
-						res.redirect("/news/" + findedNews._id);
+						res.redirect("/news/" + findedNews.more);
 					}
 				});
 				
