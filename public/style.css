@@ -39,7 +39,9 @@ body {
 }
 input[type=text],
 input[type=password],
-input[type=search] {
+input[type=search],
+input[type=number],
+input[type=email] {
 	background: none;
 	border-bottom:1px solid #FBFA04;
 	border-left:none;
@@ -50,8 +52,21 @@ input[type=search] {
   
   input[type=text]::placeholder,
   input[type=password]::placeholder,
-  input[type=search]::placeholder {
+  input[type=search]::placeholder,
+  input[type=number]::placeholder,
+  input[type=email]::placeholder {
 	color:#FBFA04;
+  }
+  .form {
+	  background: none;
+	  padding: 2%;
+	  border: 1px solid #FBFA04;
+	  color: #FBFA04;
+	  border-radius: 5px;
+  }
+  .form:hover{
+	  background: #FBFA04;
+	  color: #1a1a1a;
   }
 .alert2 {
 	border:2px solid #FBFA04;

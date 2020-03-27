@@ -92,12 +92,46 @@
 		<% } %>
 		<% if(typeof about !== 'undefined'){ %>
 			<li class="nav-item">
-        		<a class="nav-link" href="/about" style="color:#FBFA04"><i class="fas fa-address-card"></i> O firmie</a>
-      		</li>
+				<div class="dropdown">
+					<a class="nav-link dropdown-toggle justify-content-center" style="color:#FBFA04" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fas fa-address-card"></i> O nas
+					</a>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background: #eeeeee">
+					  
+
+						<% if(typeof contact !== 'undefined'){ %>
+							<a class="dropdown-item" href="/about">Informacje</a>
+							<a class="dropdown-item active" href="/contact">Kontakt</a>
+						<% } else { %>
+							<a class="dropdown-item active" href="/about">Informacje</a>
+							<a class="dropdown-item" href="/contact">Kontakt</a>
+						<% } %>
+						
+						
+						
+					</div>
+				</div>
+			</li>
+			
 		<% } else { %>
 			<li class="nav-item">
-        		<a class="nav-link" href="/about"><i class="fas fa-address-card"></i> O firmie</a>
-      		</li>
+				<div class="dropdown">
+					<a class="nav-link dropdown-toggle justify-content-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fas fa-address-card"></i> O nas
+					</a>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background: #eeeeee">
+					  
+
+					
+							<a class="dropdown-item" href="/about">Informacje</a>
+							<a class="dropdown-item" href="/contact">Kontakt</a>
+						
+						
+						
+						
+					</div>
+				</div>
+			</li>
 		<% } %>
       
 		
@@ -114,15 +148,7 @@
      		 </li>
 		<% } %>
      
-		<% if(typeof contact !== 'undefined'){ %>
-			<li class="nav-item">
-        		<a class="nav-link" href="/contact" style="color:#FBFA04"><i class="fas fa-address-book"></i> Kontakt</a>
-      		</li>
-		<% } else { %>
-			<li class="nav-item">
-        		<a class="nav-link" href="/contact"><i class="fas fa-address-book"></i> Kontakt</a>
-      		</li>
-		<% } %>
+		
       <% if(typeof newse !== 'undefined'){ %>
 			<li class="nav-item">
         		<a class="nav-link" href="/news" style="color:#FBFA04"><i class="fas fa-newspaper"></i> Aktualności</a>
@@ -132,21 +158,31 @@
         		<a class="nav-link" href="/news"><i class="fas fa-newspaper"></i> Aktualności</a>
       		</li>
 		<% } %>
-		<% if(typeof bsearch !== 'undefined'){ %>
+		<% if(typeof offer !== 'undefined'){ %>
 			<li class="nav-item">
-        		<a class="nav-link" href="/batteries/search" style="color:#FBFA04"><i class="fas fa-search"></i> Wyszukiwarka akumulatorów</a>
+        		<a class="nav-link" href="/offer/applications/new" style="color:#FBFA04"><i class="far fa-question-circle"></i> Zapytaj o ofertę</a>
       		</li>
 		<% } else { %>
 			<li class="nav-item">
-				<a class="nav-link" href="/batteries/search"><i class="fas fa-search"></i> Wyszukiwarka akumulatorów</a>
+				<a class="nav-link" href="/offer/applications/new"><i class="far fa-question-circle"></i> Zapytaj o ofertę</a>
 			</li>
 		<% } %>
 		<% if(typeof currentUser !== 'undefined'){ %>
 			<li class="nav-item">
-				<a class="nav-link" href="/news/new">Dodaj nowinkę</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="/logout">Wyloguj się</a>
+				<div class="dropdown">
+					<a class="nav-link dropdown-toggle justify-content-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					   Administracja
+					</a>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background: #eeeeee">
+					  
+
+						<a class="dropdown-item" href="/news/new">Dodaj aktualność</a>
+						<a class="dropdown-item" href="/offer/applications">Zapytania o oferty</a>
+						<a class="dropdown-item" href="/logout">Wyloguj</a>
+						
+						
+					</div>
+				</div>
 			</li>
 		<% } %>
     </ul>

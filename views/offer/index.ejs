@@ -1,0 +1,99 @@
+<% include ../partials/headero %>
+<br>
+
+    <div class="container">
+        <% if(error.length > 0){ %>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert alert-danger" role="alert">
+                        <%= error %>
+                    </div>
+                </div>
+            </div>
+            
+        <% } %>
+        <% if(success.length > 0){ %>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert alert-success" role="alert">
+                        <%= success %>
+                    </div>
+                </div>
+            </div>
+            
+        <% } %>
+        <div class="row">
+            <div class="col-lg-12">
+                    <h1 class="info text-center">Zapytania o ofertę</h1>
+				<br>
+				<form action="/offer/applications/search" method="get">
+					<div class="input-group mb-3">
+						<input type="search" id="news" class="form-control" name="search" placeholder="Wpisz markę/model" aria-label="Wpisz markę/model" aria-describedby="basic-addon2">
+						<div class="input-group-append">
+							<button class="btn btn-warning" type="submit" style="border:none; background:none;border-bottom: 1px solid #FBFA04; color: #FBFA04"><i class="fas fa-search"></i></button>
+						</div>
+					</div>
+				</form>
+            </div>
+		
+			
+		</div>
+            
+               
+                            <% if(offers.length===0){ %>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                            <p class="neutral text-center">Nie masz nowych zapytań o ofertę</p>
+                                    </div>
+                                </div>
+                               
+                               
+                            <% } else { %>
+								<div class="row">
+									<% for(let i=offers.length-1;i>=0;i--){ %>
+										<div class="col-lg-4 col-md-12" style="margin-top: 8px">
+											<div class="card" style="border: #1a1a1a;background-color: #1a1a1a">
+												
+												
+												
+													<div class="card-title info text-center">
+                                                        <br>
+															
+                                                            Zapytanie o ofertę id <%= offers[i]._id %>
+														</div>
+												<div class="card-body" style="background-color: #1a1a1a">
+                                                    <p class="neutralb">Marka: <strong><%- offers[i].brand %></strong></p>
+                                                    <p class="neutralb">Model: <strong><%- offers[i].model %></strong></p>
+                                                    <p class="neutralb">Silnik: <strong><%- offers[i].engine %></strong></p>
+                                                    <p class="neutralb">Rok produkcji: <strong><%- offers[i].year %></strong></p>
+                                                    <p class="neutralb">Część: <strong><%- offers[i].part %></strong></p>
+                                                    <p class="neutralb">Email: <strong><%- offers[i].email %></strong></p>
+                                                    <% if(offers[i].isSent === false){ %>
+                                                        <a href="/offer/applications/<%= offers[i]._id %>/send" class="btn btn-dark">Wyślij ofertę</a>
+                                                    <% } else { %>
+                                                        <a href="/offer/applications/<%= offers[i]._id %>/delete" class="btn btn-secondary">Usuń ofertę</a>	
+                                                    <% } %>
+                                                    
+                                                    
+												</div>
+											</div>
+										</div>
+									<% } %>
+								</div>
+                            <% } %>
+               
+                   
+            </div>
+           
+            
+        	<script>
+					 $(".form-control").on('click', function(){
+                            $(".form-control").css({
+                                "background": "none",
+                                "color": "#FBFA04"
+                                
+                            });
+                        });
+				</script>
+
+<% include ../partials/footer %>

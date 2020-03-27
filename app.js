@@ -4,11 +4,13 @@ const express = require("express"),
 	  mongoose = require("mongoose"),
 	  passport = require("passport"),
 	  LocalStrategy = require("passport-local"),
+	  async 				= require("async"),
 	  passportLocalMongoose = require("passport-local-mongoose"),
-	  flash = require("connect-flash"),
-	  methodOverride = require("method-override");
-	  var multer = require("multer");
-	  var dotenv = require("dotenv");
+	  flash 				= require("connect-flash"),
+	  nodemailer 			= require("nodemailer"),
+	  methodOverride 		= require("method-override"),
+	  multer 			= require("multer"),
+	  dotenv 			= require("dotenv");
 	  dotenv.config();
   
 var storage = multer.diskStorage({
@@ -66,6 +68,17 @@ const newsSchema = new mongoose.Schema({
 
 let News = mongoose.model("News", newsSchema);
 
+const offerSchema = new mongoose.Schema({
+	brand: String,
+	model: String,
+	engine: String,
+	year: Number,
+	part: String,
+	email: String,
+	isSent: Boolean
+});
+
+let Offer = mongoose.model("Offer", offerSchema);
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -109,8 +122,116 @@ app.get("/register", function(req, res){
 	res.render("register", {header: "Danmag-części i akcesoria motoryzacyjne | Rejestracja", currentUser: req.user})
 });
 
-app.get("/batteries/search", function(req, res){
-	res.render("bsearch", { currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Wyszukiwarka akumulatorów", bsearch:"" });
+app.get("/offer/applications/new", function(req, res){
+	res.render("./offer/new", { currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Zapytaj o ofertę", offer:"" });
+});
+
+app.get("/offer/applications/search", isLoggedIn, (req, res) => {
+	const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+	Offer.find({ $and: [
+		{
+			$or: [{ model: regex }, {brand: regex}]
+		}
+	]}, (err, offers) => {
+		if(err){
+			console.log(err)
+		} else {
+			res.render("./offer/search", {currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Zapytania o ofertę | Wyszukiwanie", param: req.query.search, offers:offers})
+		}
+	})
+})
+
+app.post("/offer/applications", function(req, res){
+	let newOffer = new Offer({
+		brand: req.body.brand,
+		model: req.body.model,
+		engine: req.body.engine,
+		year: req.body.year,
+		part: req.body.part,
+		email: req.body.email,
+		isSent: false
+	});
+	Offer.create(newOffer, function(err, createdOffer){
+		if(err){
+			console.log(err);
+		} else {
+			req.flash("success", "Twoje zapytanie o ofertę zostało pomyślnie wysłane. Postaramy się jak najszybciej odpowiedzieć drogą mailową");
+			res.redirect("/");
+		}
+	})
+});
+
+app.get("/offer/applications", isLoggedIn, (req, res) => {
+	Offer.find({}, (err, offers) => {
+		if(err){
+			console.log(err);
+		} else {
+			res.render("./offer/index", {currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Zapytania o ofertę", offers:offers})
+		}
+	})
+});
+
+
+app.get("/offer/applications/:id/send", isLoggedIn, (req, res) => {
+	Offer.findById(req.params.id, (err, offer) => {
+		if(err){
+			console.log(err)
+		} else {
+			res.render("./offer/send", {currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Zapytania o ofertę | Wyślij ofertę", offer:offer})
+		}
+	})
+});
+
+app.post("/offer/:id/send", isLoggedIn, (req, res) => {
+	async.waterfall([
+        function(done) {
+            Offer.findById(req.params.id, (err, offer) => {
+                if(!offer){
+                    req.flash("error", "Nie znaleźliśmy takiej oferty");
+                    return res.redirect("back");
+                }
+                
+                  
+                        
+                        offer.isSent = true;
+                        offer.save(function(err){
+                         
+                                done(err, offer);
+                            });
+                        
+               
+            });
+        },
+        function(offer, done){
+			const mailgun = require("mailgun-js");
+			const DOMAIN = 'mkdportfolio.pl';
+			const mg = mailgun({apiKey: process.env.API_KEY, domain: DOMAIN, host:"api.eu.mailgun.net"});
+			const data = {
+				from: 'Danmag - auto części <danmag@danmag.pl>',
+                to: offer.email,
+                subject: req.body.topic,
+                text: req.body.text
+			};
+			mg.messages().send(data, function (error, body) {
+				req.flash("success", "Oferta została wysłana pomyślnie");
+				console.log(error);
+                done(error);
+			});
+            
+        }
+    ], function(err){
+        res.redirect("/offer/applications");
+    });
+})
+
+app.get("/offer/applications/:id/delete", isLoggedIn, (req, res) => {
+	Offer.findByIdAndRemove(req.params.id, (err, deletedOffer) => {
+		if(err){
+			console.log(err)
+		} else {
+			res.redirect("/offer/applications")
+		}
+	})
 });
 
 app.post("/login", passport.authenticate("local", {
@@ -158,7 +279,7 @@ app.get("/about", function(req, res){
 });
 
 app.get("/contact", function(req, res){
-	res.render("contact", {header: "Danmag-części i akcesoria motoryzacyjne | Kontakt", contact:"", currentUser: req.user});
+	res.render("contact", {header: "Danmag-części i akcesoria motoryzacyjne | Kontakt",about:"", contact:"", currentUser: req.user});
 });
 
 app.get("/zakuwanie", function(req, res){
