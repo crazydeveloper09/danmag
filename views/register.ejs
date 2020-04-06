@@ -35,6 +35,8 @@
                         <form action="/register" method="post">
                             <input type="text" name="username" class="form-control" placeholder="Nazwa użytkownika">
                             <br>
+							<input type="email" name="email" class="form-control" placeholder="Email">
+                            <br>
                             <input type="password" name="password" class="form-control" placeholder="Hasło">
                             <br>
                             <input type="submit" value="Zarejestruj się" class="btn btn-warning">
@@ -42,6 +44,14 @@
                     </div>
                 </div>
             </div>
+	 <script>
+      $(".form-control").on('click', function(){
+                $(".form-control").css({
+                    "background": "none",
+                    "color": "#FBFA04"
+                });
+            });
+    </script>
 
 </body>
 </html>

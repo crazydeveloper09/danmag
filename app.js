@@ -39,6 +39,7 @@ mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true, useUnifiedTopo
 
 const danmagSchema = new mongoose.Schema({
 	username: String,
+	email:String,
 	password: String
 });
 danmagSchema.plugin(passportLocalMongoose);
@@ -248,7 +249,8 @@ app.get("/logout", function(req, res) {
 
 app.post("/register", function(req, res){
     let newUser = new Danmag({
-        username: req.body.username
+        username: req.body.username,
+		email:req.body.email
     });
     Danmag.register(newUser, req.body.password, function(err, user) {
         if(err) {
