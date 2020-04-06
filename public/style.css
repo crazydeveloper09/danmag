@@ -46,6 +46,10 @@ body {
 	font-size: 18px;
 	
 }
+#username,
+#password {
+	border: 1px solid #FBFA04;
+}
 
 #description {
 	border-left: none;
