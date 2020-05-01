@@ -1,16 +1,17 @@
-const express = require("express"),
-	  app     = express(),
-	  bodyParser = require("body-parser"),
-	  mongoose = require("mongoose"),
-	  passport = require("passport"),
-	  LocalStrategy = require("passport-local"),
+const express 				= require("express"),
+	  app     				= express(),
+	  bodyParser 			= require("body-parser"),
+	  mongoose 				= require("mongoose"),
+	  passport 				= require("passport"),
+	  LocalStrategy 		= require("passport-local"),
 	  async 				= require("async"),
+	  crypto 				= require("crypto"),
 	  passportLocalMongoose = require("passport-local-mongoose"),
 	  flash 				= require("connect-flash"),
 	  nodemailer 			= require("nodemailer"),
 	  methodOverride 		= require("method-override"),
-	  multer 			= require("multer"),
-	  dotenv 			= require("dotenv");
+	  multer 				= require("multer"),
+	  dotenv 				= require("dotenv");
 	  dotenv.config();
   
 var storage = multer.diskStorage({
@@ -40,7 +41,9 @@ mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true, useUnifiedTopo
 const danmagSchema = new mongoose.Schema({
 	username: String,
 	email:String,
-	password: String
+	password: String,
+	resetPasswordToken: String,
+	resetPasswordExpires: Date
 });
 danmagSchema.plugin(passportLocalMongoose);
 let Danmag = mongoose.model("Danmag", danmagSchema);
@@ -115,13 +118,6 @@ app.get("/", function(req, res){
 	
 });
 
-app.get("/login", function(req, res){
-	res.render("login", {header: "Danmag-części i akcesoria motoryzacyjne | Logowanie", currentUser: req.user})
-});
-
-app.get("/register", function(req, res){
-	res.render("register", {header: "Danmag-części i akcesoria motoryzacyjne | Rejestracja", currentUser: req.user})
-});
 
 app.get("/offer/applications/new", function(req, res){
 	res.render("./offer/new", { currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Zapytaj o ofertę", offer:"" });
@@ -235,6 +231,114 @@ app.get("/offer/applications/:id/delete", isLoggedIn, (req, res) => {
 	})
 });
 
+app.get("/forgot", function(req, res){
+    res.render("forgot", {header:"Danmag - części i akcesoria motoryzacyjne | Poproś o zmianę hasła"});
+});
+
+app.post("/forgot", function(req, res, next){
+    async.waterfall([
+        function(done) {
+            crypto.randomBytes(20, function(err, buf) {
+                let token = buf.toString('hex');
+                done(err, token);
+            });
+        },
+        function(token, done){
+            Danmag.findOne({ email: req.body.email }, function(err, user){
+                if(!user){
+                    req.flash('error', 'Nie znaleźliśmy konta z takim emailem. Spróbuj ponownie');
+                    return res.redirect("/forgot");
+                }
+                user.resetPasswordToken = token;
+                user.resetPasswordExpires = Date.now() + 360000;
+                user.save(function(err){
+                    done(err, token, user);
+                });
+            });
+        },
+        function(token, user, done) {
+            const mailgun = require("mailgun-js");
+			const DOMAIN = 'mkdportfolio.pl';
+			const mg = mailgun({apiKey: process.env.API_KEY, domain: DOMAIN, host:"api.eu.mailgun.net"});
+			const data = {
+				from: 'Danmag - auto części <danmag@danmag.pl>',
+                to: user.email,
+                subject: "Resetowanie hasła na stronie Danmag",
+                text: 'Otrzymujesz ten email, ponieważ ty (albo ktoś inny) zażądał zmianę hasła na stronie Danmag. \n\n' + 
+                    'Prosimy kliknij w poniższy link albo skopiuj go do paska przeglądarki, by dokończyć ten proces: \n\n' +
+                    'https://' + req.headers.host + '/reset/' + token + '\n\n' + 
+                    'Jeśli to nie ty zażądałeś zmiany, prosimy zignoruj ten email, a twoje hasło nie zostanie zmienione. \n'
+			};
+			mg.messages().send(data, function (error, body) {
+				req.flash("success", "Email został wysłany na adres " + user.email + " z dalszymi instrukcjami");
+				console.log(error);
+                done(error);
+			});
+            
+        }
+    ], function(err){
+        if(err) return next(err);
+        res.redirect('/forgot');
+    });
+});
+
+app.get("/reset/:token", function(req, res){
+    Danmag.findOne({resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() }}, function(err, user){
+        if(!user) {
+            req.flash("error", "Token wygasł lub jest niepoprawny");
+            return res.redirect("/forgot");
+        }
+        res.render("reset", { token: req.params.token, header:"Danmag - części i akcesoria motoryzacyjne | Resetuj hasło" });
+    });
+});
+
+app.post("/reset/:token", function(req, res){
+    async.waterfall([
+        function(done) {
+            Danmag.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user){
+                if(!user){
+                    req.flash("error", "Token wygasł lub jest niepoprawny");
+                    return res.redirect("back");
+                }
+                if(req.body.password === req.body.confirm){
+                    user.setPassword(req.body.password, function(err){
+                        user.resetPasswordExpires = undefined;
+                        user.resetPasswordToken = undefined;
+                        user.save(function(err){
+                            req.logIn(user, function(err){
+                                done(err, user);
+                            });
+                        });
+                    });
+                } else {
+                    req.flash("error", "Hasła nie pasują do siebie");
+                    return res.redirect("back");
+                }
+            });
+        },
+        function(user, done){
+			const mailgun = require("mailgun-js");
+			const DOMAIN = 'mkdportfolio.pl';
+			const mg = mailgun({apiKey: process.env.API_KEY, domain: DOMAIN, host:"api.eu.mailgun.net"});
+			const data = {
+				from: 'Danmag - auto części <danmag@danmag.pl>',
+                to: user.email,
+                subject: "Potwierdzenie zmiany hasła na stronie Danmag",
+                text: 'Witaj ' + user.username + ', \n\n' + 
+                'To jest potwierdzenie, że twoje hasło zostało właśnie zmienione'
+			};
+			mg.messages().send(data, function (error, body) {
+				req.flash("success", "Twoje hasło zostało zmienione pomyślnie");
+				console.log(error);
+                done(error);
+			});
+            
+        }
+    ], function(err){
+        res.redirect("/");
+    });
+});
+
 app.post("/login", passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/login",
@@ -245,6 +349,13 @@ app.post("/login", passport.authenticate("local", {
 app.get("/logout", function(req, res) {
     req.logout();
     res.redirect("/login");
+});
+app.get("/login", function(req, res){
+	res.render("login", {header: "Danmag-części i akcesoria motoryzacyjne | Logowanie", currentUser: req.user})
+});
+/*
+app.get("/register", function(req, res){
+	res.render("register", {header: "Danmag-części i akcesoria motoryzacyjne | Rejestracja", currentUser: req.user})
 });
 
 app.post("/register", function(req, res){
@@ -263,7 +374,7 @@ app.post("/register", function(req, res){
         });
     });
 });
-
+*/
 app.get("/news/search", function(req, res){
 	const regex = new RegExp(escapeRegex(req.query.title), 'gi');
 	News.find({title: regex}, function(err, foundedNews){
