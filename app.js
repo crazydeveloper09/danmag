@@ -79,7 +79,8 @@ const offerSchema = new mongoose.Schema({
 	year: Number,
 	part: String,
 	email: String,
-	isSent: Boolean
+	isSent: Boolean,
+	date: Date
 });
 
 let Offer = mongoose.model("Offer", offerSchema);
@@ -139,23 +140,53 @@ app.get("/offer/applications/search", isLoggedIn, (req, res) => {
 })
 
 app.post("/offer/applications", function(req, res){
-	let newOffer = new Offer({
-		brand: req.body.brand,
-		model: req.body.model,
-		engine: req.body.engine,
-		year: req.body.year,
-		part: req.body.part,
-		email: req.body.email,
-		isSent: false
-	});
-	Offer.create(newOffer, function(err, createdOffer){
-		if(err){
-			console.log(err);
-		} else {
-			req.flash("success", "Twoje zapytanie o ofertę zostało pomyślnie wysłane. Postaramy się jak najszybciej odpowiedzieć drogą mailową");
-			res.redirect("/");
+	async.waterfall([
+		function(done) {
+			let newOffer = new Offer({
+				brand: req.body.brand,
+				model: req.body.model,
+				engine: req.body.engine,
+				year: req.body.year,
+				part: req.body.part,
+				email: req.body.email,
+				isSent: false,
+				date: Date.now()
+			});
+			Offer.create(newOffer, function(err, createdOffer){
+				if(err){
+					console.log(err);
+				} else {
+					
+					done(err, createdOffer)
+				}
+			})
+		},
+		function(createdOffer, done){
+			const mailgun = require("mailgun-js");
+			const DOMAIN = 'mkdportfolio.pl';
+			const mg = mailgun({apiKey: process.env.API_KEY, domain: DOMAIN, host:"api.eu.mailgun.net"});
+			const data = {
+				from: 'Danmag - auto części <danmag@danmag.pl>',
+                to: "cruziu@go2.pl",
+                subject: "Nowe zapytanie o ofertę",
+				text: 'Właśnie dostałeś nowe zapytanie o ofertę \n\n' +
+				'Marka: ' + createdOffer.brand + '\n' +
+				'Model: ' + createdOffer.model + '\n' +
+				'Silnik: ' + createdOffer.engine + '\n' +
+				'Rok: ' + createdOffer.year + '\n' +
+				'Część: ' + createdOffer.part + '\n' +
+				'Email: ' + createdOffer.email + '\n' 
+			};
+			mg.messages().send(data, function (error, body) {
+				req.flash("success", "Twoje zapytanie o ofertę zostało pomyślnie wysłane. Postaramy się jak najszybciej odpowiedzieć drogą mailową");
+				console.log(error);
+                done(error);
+			});
+            
 		}
-	})
+	], function(err){
+        res.redirect("/");
+    });
 });
 
 app.get("/offer/applications", isLoggedIn, (req, res) => {

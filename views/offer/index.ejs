@@ -68,6 +68,9 @@
                                                     <p class="neutralb">Rok produkcji: <strong><%- offers[i].year %></strong></p>
                                                     <p class="neutralb">Część: <strong><%- offers[i].part %></strong></p>
                                                     <p class="neutralb">Email: <strong><%- offers[i].email %></strong></p>
+													<% if(offers[i].date){ %>
+                                                        <p class="info2">Złożone <strong><%- offers[i].date.toLocaleDateString() %></strong></p>
+                                                    <% } %>
                                                     <% if(offers[i].isSent === false){ %>
                                                         <a href="/offer/applications/<%= offers[i]._id %>/send" class="btn btn-dark">Wyślij ofertę</a>
                                                     <% } else { %>
