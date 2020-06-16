@@ -1,4 +1,4 @@
-<% include ../partials/headero %>
+<% include ../partials/header %>
 <br>
 <div class="container">
     <div class="row">
@@ -19,11 +19,21 @@
                   
                     <p class="neutralb"><%- news.opis %></p>
                     <% if(typeof currentUser !== 'undefined'){ %>
-                       <div class="d-inline">
-                           <a href="/news/<%= news.more %>/underposts/new" class="btn btn-primary">Dodaj podpost</a>
-                           <a href="/news/<%= news.more %>/edit" class="btn btn-warning">Edytuj</a>
-                           <a href="/news/<%= news.more %>/delete" class="btn btn-danger">Usuń</a>
-                       </div>
+                        <div class="dropdown">
+                            <button class="form dropdown-toggle justify-content-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Modyfikacja
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background: #eeeeee">
+                                <a class="dropdown-item" href="/news/<%= news.more %>/edit">Edytuj</a>
+                                <a class="dropdown-item" href="/news/<%= news._id %>/delete">Usuń</a>
+                                <a class="dropdown-item" href="/news/<%= news._id %>/edit/picture">Edytuj zdjęcie główne</a>
+                                <a class="dropdown-item" href="/news/<%= news._id %>/new/picture">Dodaj do galerii</a>
+                                <a class="dropdown-item" href="/news/<%= news.more %>/underposts/new">Dodaj podpost</a>
+                               
+                                
+                                
+                            </div>
+                        </div>
                     <% } %>
                     <% if(news.pictures.length ===0){ %>
 
@@ -31,7 +41,7 @@
 					   <p class="info">Galeria</p>
                         <% for(let j=0;j<news.pictures.length;j++){ %>
                             <div class="col-lg-4 col-md-12">
-                                <img src="<%= news.pictures[j] %>" class="img-thumbnail">
+                                <img src="<%= news.pictures[j].source %>" class="img-thumbnail">
                             </div>
                         <% } %>
                     <% } %>

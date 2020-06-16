@@ -1,4 +1,4 @@
-<% include ../partials/headero %>
+<% include ../partials/header %>
 <br>
     <div class="container">
         <div class="row">
@@ -43,7 +43,7 @@
 												<div class="card-body" style="background-color: #1a1a1a">
 														<p class="neutral"><%- news[i].opis %></p>
 														<% if(news[i].opis.length>200){ %>
-															<a href="/news/<%= news[i].more %>" class="info2">Czytaj więcej...</a>
+															<a href="/news/<%= news[i].more %>" class="form">Czytaj więcej...</a>
 														<% } %>
 												</div>
 											</div>
@@ -56,13 +56,6 @@
             </div>
            
             
-        <script>
-            $("#news").on('click', function(){
-                $("#news").css({
-                    "background": "none",
-                    "color": "#FBFA04"
-                });
-            });
-        </script>
+       
 
 <% include ../partials/footer %>

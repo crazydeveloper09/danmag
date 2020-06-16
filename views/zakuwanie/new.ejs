@@ -1,0 +1,33 @@
+<% include ../partials/headero %>
+    <br>
+    <br>
+    <br>
+		<div class="container" id="addNews">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="card" style="border: #1a1a1a">
+						<div class="card-body" style="background-color: #1a1a1a">
+                            <div class="card-title info text-center">Dodaj podstronę Zakuwanie przewodów</div>
+                            <form action="/zakuwanie" method="post" enctype="multipart/form-data">
+                                <p class="info2">Wpisz tytuł podstrony</p>
+                                <input type="text" name="title" placeholder="Tytuł podstrony" class="form-control">
+                                <br>
+                                <p class="info2">Wpisz opis co oferujemy</p>
+                                <textarea class="form-control" name="offer" id="description" placeholder="Opis co oferujemy"></textarea>
+                                <br>
+                                <p class="info2">Zdjęcie główne</p>
+                                <input type="file" name="profile" style="color: #FBFA04">
+                                <br>
+                                <br>
+                                <input type="submit" class="form" value="Dodaj podstronę">
+                            </form>
+							
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+            
+                
+<% include ../partials/footer %>

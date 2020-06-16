@@ -1,0 +1,108 @@
+<% include ../partials/header %>
+<br>
+<div class="container">
+    <% if(zakuwanie.length === 0){ %>
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-12">
+                <div class="alert alert-dark">
+                    Nie dodaliśmy jeszcze podstrony Zakuwanie przewodów
+                    <% if(currentUser){ %>
+                        , <a href="/zakuwanie/new">dodaj ją</a>
+                    <% } %>
+                    
+                </div>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card" style="border: #1a1a1a">
+                    <div class="card-body" style="background-color: #1a1a1a">
+                        <div class="card-title info text-center"><%= zakuwanie[0].title %></div>
+                        <img src="<%= zakuwanie[0].profile %>" class="card-img-top">
+                        <br>
+                        <br>
+                        <p class="info"><%= zakuwanie[0].offer %></p>
+                        <p class="info2">Dlaczego serwis przewodów hamulcowych jest tak ważny?</p>
+                        <% if(zakuwanie[0].whySoImportant.length === 0){ %>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="alert alert-dark">
+                                        Nie dodaliśmy jeszcze powodów dlaczego serwis przewodów 
+                                        hamulcowych jest
+                                        tak ważny
+                                    </div>
+                                </div>
+                            </div>
+                        <% } else { %>
+                            <ul class="neutral">
+                                <% zakuwanie[0].whySoImportant.forEach((whySoImportant) => { %>
+                                    <li><%= whySoImportant.description %></li>
+                                    <% if(currentUser){ %>
+                                        <a href="/zakuwanie/<%= zakuwanie[0]._id %>/whySoImportant/<%= whySoImportant._id %>/edit" class="text-secondary">Edytuj</a>
+                                        <a href="/zakuwanie/<%= zakuwanie[0]._id %>/whySoImportant/<%= whySoImportant._id %>/delete" class="text-dark">Usuń</a>
+                                    <% } %>
+                                <% }) %>
+                            </ul>
+                        <% } %>
+                        
+                        <p class="info2">Dlaczego warto wykonać przewody hamulcowe w naszej firmie?</p>
+                        <% if(zakuwanie[0].whyHere.length === 0){ %>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="alert alert-dark">
+                                        Nie dodaliśmy jeszcze powodów dlaczego wykonać serwis
+                                        przewodów hamulcowych u nas
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        <% } else { %>
+                            <ol>
+                                <% zakuwanie[0].whyHere.forEach((whyHere) => { %>
+                                    <li class="info2">
+                                        <%= whyHere.title %>
+                                        <p class="neutral"><%= whyHere.description %></p>
+                                        <% if(currentUser){ %>
+                                            <a href="/zakuwanie/<%= zakuwanie[0]._id %>/whyHere/<%= whyHere._id %>/edit" class="text-secondary">Edytuj</a>
+                                            <a href="/zakuwanie/<%= zakuwanie[0]._id %>/whyHere/<%= whyHere._id %>/delete" class="text-dark">Usuń</a>
+                                        <% } %>
+                                    </li>
+                                <% }) %>
+                            </ol>
+                        <% } %>
+                        <% if(zakuwanie[0].gallery.length !== 0){ %>
+                            <div class="row">
+                                <% zakuwanie[0].gallery.forEach((gallery) => { %>
+                                    <div class="col-lg-4 col-md-12" style="margin-top:5px">
+                                        <img class="img-thumbnail" src="<%= gallery.source %>" style="border:none">
+                                    </div>
+                                <% }) %>
+                            </div>
+                        <% } %>
+                        <br>
+                        <% if(currentUser){ %>
+                            <div class="dropdown">
+                                <button class="form dropdown-toggle justify-content-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Modyfikacja
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background: #eeeeee">
+                                    <a class="dropdown-item" href="/zakuwanie/<%= zakuwanie[0]._id %>/edit">Edytuj</a>
+                                    <a class="dropdown-item" href="/zakuwanie/<%= zakuwanie[0]._id %>/delete">Usuń</a>
+                                    <a class="dropdown-item" href="/zakuwanie/<%= zakuwanie[0]._id %>/edit/profile">Edytuj zdjęcie główne</a>
+                                    <a class="dropdown-item" href="/zakuwanie/<%= zakuwanie[0]._id %>/new/picture">Dodaj do galerii</a>
+                                    <a class="dropdown-item" href="/zakuwanie/<%= zakuwanie[0]._id %>/whySoImportant/add">Dodaj powód dlaczego serwis tak ważny</a>
+                                    <a class="dropdown-item" href="/zakuwanie/<%= zakuwanie[0]._id %>/whyHere/add">Dodaj powód dlaczego wykonać serwis tutaj</a>
+                                    
+                                    
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    <% } %>
+    
+</div>
+<% include ../partials/footer %>

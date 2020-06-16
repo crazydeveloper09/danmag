@@ -35,18 +35,20 @@ d		<br>
 										<div class="col-lg-4 col-md-12 text-center">
 												<span class="text-center info"><i class="fas fa-address-book"></i></span>
 												<span class="text-center info">Kontakt</span>
+												<% if(admin){ %>
+													<p class="neutral"><%= admin.companyName %> <br> ul. <%= admin.street %> 
+														<br>
+														<%= admin.postCode %> <%= admin.city %>
+														<br>
+														<br>
+														<span><a href="tel:<%= admin.phone %>" style="color: white; margin: 5px;"><i class="fas fa-phone-square-alt fa-lg"></i></a>
+
+															<a href="mailto: <%= admin.companyEmail %>" style="color: white;margin: 5px"><i class="fas fa-envelope-square fa-lg"></i></a>
+															<a href="<%= admin.facebookLink %>" target="_blank" style="color: white;margin: 5px"><i class="fab fa-facebook-square fa-lg"></i></a>
+														</span>
+													</p>
+												<% } %>
 												
-												<p class="neutral">PPHU „Danmag” Auto Części <br> ul.Mickiewicza 53b 
-													<br>
-														67-200 Głogów
-													<br>
-													<br>
-													<span><a href="tel:+48768333595" style="color: white; margin: 5px;"><i class="fas fa-phone-square-alt fa-lg"></i></a>
-														<a href="tel:+48768356252" style="color: white;margin: 5px"> <i class="fas fa-fax fa-lg"></i></a>
-														<a href="mailto: danmag@danmag.pl" style="color: white;margin: 5px"><i class="fas fa-envelope-square fa-lg"></i></a>
-														<a href="https://www.facebook.com/danmagpl/?ref=br_rs" target="_blank" style="color: white;margin: 5px"><i class="fab fa-facebook-square fa-lg"></i></a>
-													</span>
-												</p>
 												
 												
 										</div>
@@ -69,7 +71,12 @@ d		<br>
 							<img src="/logo.png" alt="" height="20">
 							<span class="footer">Danmag <script>document.write(new Date().getFullYear())</script>  &#169; Wszelkie prawa zastrzeżone by: <a href="https://mkdportfolio.herokuapp.com">MK</a>  </span>
 							<br>
-							<a href="https://danmag.herokuapp.com/login" style="color: white;font-size: 13px; ">panel administracji</a>
+							<% if(return_route){ %>
+								<a href="https://danmag.herokuapp.com/login?return_route=<%= return_route %>" style="color: white;font-size: 13px; ">panel administracyjny</a>
+							<% } else { %> 
+								<a href="https://danmag.herokuapp.com/login?return_route=<%= route %>" style="color: white;font-size: 13px; ">panel administracyjny</a>
+							<% } %>
+							
 					</div>
 			</div>
 			<br>
@@ -82,6 +89,13 @@ d		<br>
 	$('.carousel').carousel({
 		interval: 7000
 	})
+	$(".form-control").on('click', function(){
+                $(".form-control").css({
+                    "background": "none",
+					"color": "#FBFA04",
+					"box-shadow": "none"
+                });
+            });
 </script>
 	</body>
 </html>

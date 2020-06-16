@@ -1,0 +1,28 @@
+<% include ../partials/headero %>
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" style="background-color: #1a1a1a">
+                <div class="card-title text-center info">
+                    <br>
+                    Dodaj powód dlaczego serwis przewodów hamulcowych jest tak ważny
+                </div>
+                <div class="card-body">
+                        <form action="/zakuwanie/<%= zakuwanie._id %>/whySoImportant" method="post">
+                            
+                            <p class="info2">Wpisz opis powodu</p>
+                            <textarea name="text" id="description" class="form-control" placeholder="Powód dlaczego serwis przewodów hamulcowych jest tak ważny"></textarea>
+                            <br>
+                           
+                            <input type="submit" value="Dodaj powód" class="form">
+                        </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<% include ../partials/footer %>

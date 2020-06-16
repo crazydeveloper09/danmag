@@ -1,0 +1,90 @@
+<% include ../partials/headero %>
+<br>
+<br>
+<br>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="card" style="background-color: #1a1a1a">
+                            <div class="card-title text-center info">
+                                <br>
+                                Edytuj o firmie
+                            </div>
+                            <div class="card-body">
+                                <% if(error.length > 0){ %>
+                                    <div class="alert alert-danger" role="alert">
+                                        <%= error %>
+                                    </div>
+                                <% } %>
+                                <form action="/about/<%= user._id %>?_method=PUT" method="post">
+                                    <p class="info2">Edytuj nazwę użytkownika</p>
+                                    <input type="text" name="user[username]" class="form-control" value="<%= user.username %>" placeholder="Nazwa użytkownika">
+                                    <br>
+                                    <p class="info2">Edytuj email główny</p>
+                                    <input type="email" name="user[email]" class="form-control" value="<%= user.email %>" placeholder="Email">
+                                    <br>
+                                    <p class="info2">Edytuj nazwę firmy</p>
+                                    <input type="text" name="user[companyName]" class="form-control" value="<%= user.companyName %>" placeholder="Nazwa firmy">
+                                    <br>
+                                    <p class="info2">Edytuj email firmy</p>
+                                    <input type="email" name="user[companyEmail]" class="form-control" value="<%= user.companyEmail %>" placeholder="Email firmy">
+                                    <br>
+                                    <p class="info2">Edytuj telefon</p>
+                                    <input type="tel" name="user[phone]" class="form-control" value="<%= user.phone %>" placeholder="Telefon">
+                                    <br>
+                                    
+                                     <p class="info2">Edytuj link do Facebooka</p>
+                                    <input type="text" name="user[facebookLink]" value="<%= user.facebookLink %>" class="form-control" placeholder="Link do Facebooka">
+                                    <br>
+                                    <p class="info2">Edytuj miasto</p>
+                                    <input type="text" name="user[city]" value="<%= user.city %>" class="form-control" placeholder="Miasto">
+                                    <br>
+                                    <p class="info2">Edytuj kod pocztowy</p>
+                                    <input type="text" name="user[postCode]" value="<%= user.postCode %>" pattern="[0-9]{2}\-[0-9]{3}" class="form-control" placeholder="Kod pocztowy" required>
+                                    <br>
+                                    <p class="info2">Edytuj ulicę</p>
+                                    <input type="text" name="user[street]" value="<%= user.street %>" class="form-control" placeholder="Ulica">
+                                    <br>
+                                    <p class="info2">Edytuj godzinę otwarcia w tygodniu</p>
+                                    <input type="time" name="user[weekOpen]" value="<%= user.weekOpen %>" class="form-control">
+                                    <br>
+                                    <p class="info2">Edytuj godzinę zamknięcia w tygodniu</p>
+                                    <input type="time" name="user[weekClosed]" value="<%= user.weekClosed %>" class="form-control">
+                                    <br>
+                                    <p class="info2">Edytuj godzinę otwarcia w sobotę</p>
+                                    <input type="time" name="user[satOpen]" value="<%= user.satOpen %>" class="form-control">
+                                    <br>
+                                    <p class="info2">Edytuj godzinę zamknięcia w sobotę</p>
+                                    <input type="time" name="user[satClosed]" value="<%= user.satClosed %>" class="form-control">
+                                    <br>
+                                    <p class="info2">Edytuj opis o firmie</p>
+                                    <textarea class="form-control" name="user[description]" id="description" placeholder="Opis o firmie"><%= user.description %></textarea>
+                                    <br>
+                                    <input type="submit" value="Edytuj o firmie" class="form">
+                                </form>
+                                <br>
+                                <ul class="info2">
+                                    Poradnik formatowania tekstu opisu firmy:
+                                    <li>pogrubienie -  <pre style="color:#FBFA04"> <code> <span> &lt;strong&gt; wyraz lub wyrażenie &lt;/strong&gt; </span> </code>  </pre></li>
+                                    <li>pochylenie -  <pre style="color:#FBFA04"> <code> <span> &lt;em&gt; wyraz lub wyrażenie &lt;/em&gt; </span> </code>  </pre></li>
+                                    <li>podkreślenie -  <pre style="color:#FBFA04"> <code> <span> &lt;ins&gt; wyraz lub wyrażenie &lt;/ins&gt; </span> </code>  </pre></li>
+                                    <li>przekreślenie -  <pre style="color:#FBFA04"> <code> <span> &lt;del&gt; wyraz lub wyrażenie &lt;/del&gt; </span> </code>  </pre></li>
+                                    <li>akapity -  <pre style="color:#FBFA04"> <code> <span> &lt;br&gt; </span> </code>  </pre></li>
+                                </ul>
+                            </div>
+                        </div>
+                      
+						
+                    </div>
+                </div>
+            </div>
+	 <script>
+      $(".form-control").on('click', function(){
+                $(".form-control").css({
+                    "background": "none",
+                    "color": "#FBFA04"
+                });
+            });
+    </script>
+
+<% include ../partials/footer %>

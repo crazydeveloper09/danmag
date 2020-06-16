@@ -66,7 +66,9 @@ input[type=text],
 input[type=password],
 input[type=search],
 input[type=number],
-input[type=email] {
+input[type=email],
+input[type=tel],
+input[type=time] {
 	background: none;
 	border-bottom:1px solid #FBFA04;
 	border-left:none;
@@ -79,18 +81,29 @@ input[type=email] {
   input[type=password]::placeholder,
   input[type=search]::placeholder,
   input[type=number]::placeholder,
-  input[type=email]::placeholder {
+  input[type=email]::placeholder,
+  input[type=tel]::placeholder,
+input[type=time]::placeholder {
 	color:#FBFA04;
+  }
+  .form-full {
+	background: #FBFA04;
+	padding: 6px 12px;
+	border: 1px solid #FBFA04;
+	color: #1a1a1a;
+	border-radius: 5px;
+	text-decoration: none;
   }
   .form {
 	  background: none;
-	  padding: 2%;
+	  padding: 6px 12px;
 	  border: 1px solid #FBFA04;
 	  color: #FBFA04;
 	  border-radius: 5px;
   }
   .form:hover{
 	  background: #FBFA04;
+	  text-decoration: none;
 	  color: #1a1a1a;
   }
 .alert2 {

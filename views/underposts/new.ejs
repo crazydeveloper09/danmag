@@ -7,7 +7,7 @@
                 <div class="card-body" style="background-color: #1a1a1a">
                     <div class="card-title info text-center">Dodaj podpost</div>
                    
-                    <form action="/underposts/<%= news_id %>" method="post" enctype="multipart/form-data">
+                    <form action="/news/<%= news_id %>/underposts" method="post" enctype="multipart/form-data">
                        
                         <p class="info2">Wpisz tytuł podposta</p>
                         <input type="text" name="title" placeholder="Tytuł podposta" class="form-control">
@@ -19,7 +19,7 @@
                         <input type="file" name="profile" style="color: #FBFA04">
                         <br>
                         <br>
-                        <input type="submit" class="info2" value="Dodaj podposta" style="background: none; border: 1px solid #FBFA04; padding: 10px; border-radius: 0.3em; font-size: 15px;">
+                        <input type="submit" class="form" value="Dodaj podposta">
                     </form>
                     <br>
                     <ul class="info2">

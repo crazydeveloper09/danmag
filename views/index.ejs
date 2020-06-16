@@ -1,5 +1,28 @@
 <% include ./partials/header %>
 <br>
+	<div class="container">
+	
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card" style="border: #1a1a1a">
+          <div class="card-body" style="background-color: #1a1a1a">
+            <div class="card-title info"><i class="fas fa-tools"></i> Prowadzimy usługę zakuwania przewodów hamulcowych</div>
+            <p class="info2" style="font-size: 15px;">Wykonujemy następujące przewody hamulcowe zgodne z D.O.T:</p>
+            <ul>
+              <li class="info2" style="font-size: 15px;">Miedziane i miedziano-niklowe</li>
+              <li class="info2" style="font-size: 15px;">Gumowe 1/8 DN z podwójnym zbrojeniem z włókna syntetycznego Sae J1401</li>
+              <li class="info2" style="font-size: 15px;">Teflonowe 1/8 DN w oplocie ze stali nierdzewnej</li>
+            </ul>
+            <p class="info2" style="font-size: 15px;">Wszystkie przewody są atestowane i wykonane zgodnie z międzynarodowymi
+              normami. Jesteśmy oficjalnym partnerem amerykańskiego producenta
+              węży i końcówek hamulcowych Brake Quip.
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<br>
       <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -55,9 +78,9 @@
 														<p class="neutral"><%- news[i].opis %></p>
 														<% if(news[i].opis.length>200){ %>
 															<% if(typeof news[i].more !== 'undefined'){ %>
-																<a href="/news/<%= news[i].more %>" class="info2" style="font-size: 15px;">Czytaj więcej...</a>
+																<a href="/news/<%= news[i].more %>" class="form" style="font-size: 15px;">Czytaj więcej...</a>
 															<% } else { %>
-																<a href="/news/<%= news[i]._id %>" class="info2" style="font-size: 15px;">Czytaj więcej...</a>
+																<a href="/news/<%= news[i]._id %>" class="form" style="font-size: 15px;">Czytaj więcej...</a>
 															<% } %>
 															
 														<% } %>

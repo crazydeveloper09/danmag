@@ -1,0 +1,30 @@
+<% include ../partials/headero %>
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" style="background-color: #1a1a1a">
+                <div class="card-title text-center info">
+                    <br>
+                    Edytuj powód dlaczego wykonać serwis w Danmag
+                </div>
+                <div class="card-body">
+                        <form action="/zakuwanie/<%= zakuwanie._id %>/whyHere/<%= whyHere._id %>?_method=PUT" method="post">
+                            <p class="info2">Edytuj tytuł powodu</p>
+                            <input type="text" name="whyHere[title]" value="<%= whyHere.title %>" placeholder="Tytuł powodu" class="form-control">
+                            <br>
+                            <p class="info2">Edytuj opis powodu</p>
+                            <textarea name="whyHere[description]" id="description" class="form-control" placeholder="Powód dlaczego wykonać serwis w Danmag"><%= whyHere.description %></textarea>
+                            <br>
+                           
+                            <input type="submit" value="Edytuj powód" class="form">
+                        </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<% include ../partials/footer %>

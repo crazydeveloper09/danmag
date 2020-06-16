@@ -18,6 +18,18 @@ html {
    
  
 }
+
+.form {
+    background: none;
+    padding: 6px 12px;
+    border: 1px solid #FBFA04;
+    color: #FBFA04;
+    border-radius: 5px;
+}
+.form:hover{
+    background: #FBFA04;
+    color: #1a1a1a;
+}
 .container {
     filter: none;
 }
