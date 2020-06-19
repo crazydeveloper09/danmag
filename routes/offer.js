@@ -7,7 +7,7 @@ const express = require("express"),
     router = express.Router();
 
 app.use(flash());
-let admin_username = "Paweł";
+let admin_username = "Admin";
 
 router.get("/new", function(req, res){
 	Danmag.findOne({username: admin_username}, (err, admin) => {
@@ -41,6 +41,8 @@ router.post("/", function(req, res){
 				brand: req.body.brand,
 				model: req.body.model,
 				engine: req.body.engine,
+				engineCategory: req.body.category,
+				vin: req.body.vin,
 				year: req.body.year,
 				part: req.body.part,
 				email: req.body.email,
@@ -69,6 +71,8 @@ router.post("/", function(req, res){
 				'Model: ' + createdOffer.model + '\n' +
 				'Silnik: ' + createdOffer.engine + '\n' +
 				'Rok: ' + createdOffer.year + '\n' +
+				'Rodzaj silnika: ' + createdOffer.engineCategory + '\n' +
+				'Numer VIN: ' + createdOffer.vin + '\n' +
 				'Część: ' + createdOffer.part + '\n' +
 				'Email: ' + createdOffer.email + '\n' 
 			};
@@ -112,7 +116,7 @@ router.get("/:id/send", isLoggedIn, (req, res) => {
 	})
 });
 
-router.post("/offer/:id/send", isLoggedIn, (req, res) => {
+router.post("/:id/send", isLoggedIn, (req, res) => {
 	async.waterfall([
         function(done) {
             Offer.findById(req.params.id, (err, offer) => {
@@ -150,7 +154,7 @@ router.post("/offer/:id/send", isLoggedIn, (req, res) => {
             
         }
     ], function(err){
-        res.redirect("");
+        res.redirect("/offer/applications");
     });
 })
 
@@ -159,7 +163,7 @@ router.get("/:id/delete", isLoggedIn, (req, res) => {
 		if(err){
 			console.log(err)
 		} else {
-			res.redirect("")
+			res.redirect("/offer/applications")
 		}
 	})
 });

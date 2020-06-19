@@ -4,6 +4,8 @@ const offerSchema = new mongoose.Schema({
 	brand: String,
 	model: String,
 	engine: String,
+	engineCategory: String,
+	vin: String,
 	year: Number,
 	part: String,
 	email: String,

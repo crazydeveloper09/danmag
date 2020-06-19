@@ -7,7 +7,7 @@
                 <div class="card-body" style="background-color: #1a1a1a">
                     <div class="card-title info text-center">Wyślij ofertę na email <%= offer.email %></div>
                    
-                    <form action="/offer/<%= offer._id %>/send" method="post">
+                    <form action="/offer/applications/<%= offer._id %>/send" method="post">
                        
                         <p class="info2">Wpisz tytuł emaila</p>
                         <input type="text" name="topic" placeholder="Tytuł emaila" class="form-control">

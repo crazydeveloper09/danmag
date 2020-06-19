@@ -66,6 +66,12 @@
                                                     <p class="neutralb">Model: <strong><%- offers[i].model %></strong></p>
                                                     <p class="neutralb">Silnik: <strong><%- offers[i].engine %></strong></p>
                                                     <p class="neutralb">Rok produkcji: <strong><%- offers[i].year %></strong></p>
+                                                    <% if(offers[i].engineCategory){ %>
+                                                        <p class="neutralb">Rodzaj silnika: <strong><%- offers[i].engineCategory %></strong></p>
+                                                    <% } %>
+                                                    <% if(offers[i].vin){ %>
+                                                        <p class="neutralb">Numer VIN: <strong><%- offers[i].vin %></strong></p>
+                                                    <% } %>
                                                     <p class="neutralb">Część: <strong><%- offers[i].part %></strong></p>
                                                     <p class="neutralb">Email: <strong><%- offers[i].email %></strong></p>
                                                     <% if(offers[i].date){ %>
