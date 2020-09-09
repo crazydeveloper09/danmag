@@ -178,7 +178,10 @@ router.post("/register", function(req, res){
 
 
 router.get("/privacy-policy", function(req, res){
-	res.render("privacy", {header: "Danmag-części i akcesoria motoryzacyjne | Polityka prywatności", currentUser: req.user});
+	Danmag.findOne({username: admin_username}, (err, admin) => {
+			    res.render("privacy" , {admin:admin, header: "Danmag-części i akcesoria motoryzacyjne | Polityka prywatności", currentUser: req.user});
+            });
+	
 });
 
 
