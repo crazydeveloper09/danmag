@@ -36,14 +36,11 @@
                                      <p class="info2">Edytuj link do Facebooka</p>
                                     <input type="text" name="user[facebookLink]" value="<%= user.facebookLink %>" class="form-control" placeholder="Link do Facebooka">
                                     <br>
-                                    <p class="info2">Edytuj miasto</p>
-                                    <input type="text" name="user[city]" value="<%= user.city %>" class="form-control" placeholder="Miasto">
+                                    <p class="info2">Edytuj adres (ulica numer, kod pocztowy miasto)</p>
+                                    <input type="text" name="user[location]" value="<%= user.location %>" class="form-control" placeholder="Lokalizacja">
                                     <br>
-                                    <p class="info2">Edytuj kod pocztowy</p>
-                                    <input type="text" name="user[postCode]" value="<%= user.postCode %>" pattern="[0-9]{2}\-[0-9]{3}" class="form-control" placeholder="Kod pocztowy" required>
-                                    <br>
-                                    <p class="info2">Edytuj ulicę</p>
-                                    <input type="text" name="user[street]" value="<%= user.street %>" class="form-control" placeholder="Ulica">
+                                    <p class="info2">Edytuj opis o płatności kartą kredytową</p>
+                                    <textarea class="form-control" name="user[cardInformation]" id="description" placeholder="Opis o firmie"><%= user.cardInformation %></textarea>
                                     <br>
                                     <p class="info2">Edytuj godzinę otwarcia w tygodniu</p>
                                     <input type="time" name="user[weekOpen]" value="<%= user.weekOpen %>" class="form-control">

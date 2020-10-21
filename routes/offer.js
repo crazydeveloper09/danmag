@@ -7,12 +7,12 @@ const express = require("express"),
     router = express.Router();
 
 app.use(flash());
-let admin_username = "Admin";
+
 
 router.get("/new", function(req, res){
-	Danmag.findOne({username: admin_username}, (err, admin) => {
-		res.render("./offer/new", { admin:admin,currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Zapytaj o ofertę", offer:"" });
-	});
+	
+	res.render("./offer/new", {currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Zapytaj o ofertę", offer:"" });
+	
 	
 });
 
@@ -26,10 +26,7 @@ router.get("/search", isLoggedIn, (req, res) => {
 		if(err){
 			console.log(err)
 		} else {
-			Danmag.findOne({username: admin_username}, (err, admin) => {
-			    res.render("./offer/search", {admin:admin,currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Zapytania o ofertę | Wyszukiwanie", param: req.query.search, offers:offers})
-            });
-			
+			res.render("./offer/search", {currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Zapytania o ofertę | Wyszukiwanie", param: req.query.search, offers:offers})
 		}
 	})
 })
@@ -94,9 +91,9 @@ router.get("/", isLoggedIn, (req, res) => {
 		if(err){
 			console.log(err);
 		} else {
-			Danmag.findOne({username: admin_username}, (err, admin) => {
-			    res.render("./offer/index", {admin:admin,currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Zapytania o ofertę", offers:offers})
-            });
+			
+			res.render("./offer/index", {currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Zapytania o ofertę", offers:offers})
+            
 			
 		}
 	})
@@ -108,15 +105,15 @@ router.get("/:id/send", isLoggedIn, (req, res) => {
 		if(err){
 			console.log(err)
 		} else {
-			Danmag.findOne({username: admin_username}, (err, admin) => {
-				res.render("./offer/send", {admin:admin,currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Zapytania o ofertę | Wyślij ofertę", offer:offer})
-            });
+			
+			res.render("./offer/send", {currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Zapytania o ofertę | Wyślij ofertę", offer:offer})
+            
 			
 		}
 	})
 });
 
-router.post("/:id/send", isLoggedIn, (req, res) => {
+router.post("/offer/:id/send", isLoggedIn, (req, res) => {
 	async.waterfall([
         function(done) {
             Offer.findById(req.params.id, (err, offer) => {
@@ -154,7 +151,7 @@ router.post("/:id/send", isLoggedIn, (req, res) => {
             
         }
     ], function(err){
-        res.redirect("/offer/applications");
+        res.redirect("");
     });
 })
 
@@ -163,7 +160,7 @@ router.get("/:id/delete", isLoggedIn, (req, res) => {
 		if(err){
 			console.log(err)
 		} else {
-			res.redirect("/offer/applications")
+			res.redirect("")
 		}
 	})
 });

@@ -8,6 +8,7 @@ const express 				= require("express"),
 	  underpostRoutes 			= require("./routes/underpost"),
 	  aboutRoutes 			= require("./routes/about"),
 	  offerRoutes 			= require("./routes/offer"),
+	  apiRoutes 			= require("./routes/api"),
 	  zakuwanieRoutes 			= require("./routes/zakuwanie"),
 	  whyHereRoutes 			= require("./routes/whyHere"),
 	  whySoImportantRoutes 			= require("./routes/whySoImportant"),
@@ -54,5 +55,6 @@ app.use("/news/:news_id/underposts", underpostRoutes);
 app.use("/zakuwanie", zakuwanieRoutes);
 app.use("/zakuwanie/:zakuwanie_id/whyHere", whyHereRoutes);
 app.use("/zakuwanie/:zakuwanie_id/whySoImportant", whySoImportantRoutes);
+app.use("/api", apiRoutes)
 app.use(indexRoutes);
 app.listen(process.env.PORT)

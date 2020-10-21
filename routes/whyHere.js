@@ -8,16 +8,16 @@ const express = require("express"),
     router = express.Router({mergeParams: true});
 app.use(flash());
 app.use(methodOverride("_method"));
-let admin_username = "Paweł";
+let admin_username = "Admin";
 router.get("/redirect", isLoggedIn, (req, res) => {
     Zakuwanie.findById(req.params.zakuwanie_id, (err, zakuwanie) => {
         if(err){
             console.log(err)
         } else {
-            Danmag.findOne({username: admin_username}, (err, admin) => {
-                let header = `Danmag - części i akcesoria motoryzacyjne | ${zakuwanie.title} | Redirect page`;
-                res.render("./whyHere/redirect", {admin:admin,header: header, zakuwanieSubpage:"",zakuwanie: zakuwanie, currentUser: req.user})
-            });
+            
+            let header = `Danmag - części i akcesoria motoryzacyjne | ${zakuwanie.title} | Redirect page`;
+            res.render("./whyHere/redirect", {header: header, zakuwanieSubpage:"",zakuwanie: zakuwanie, currentUser: req.user})
+            
            
         }
     })
@@ -28,10 +28,10 @@ router.get("/add", isLoggedIn, (req, res) => {
         if(err){
             console.log(err)
         } else {
-            Danmag.findOne({username: admin_username}, (err, admin) => {
-                let header = `Danmag - części i akcesoria motoryzacyjne | ${zakuwanie.title} | Dodaj powód dlaczego tutaj`;
-                res.render("./whyHere/new", {admin:admin,header: header, zakuwanieSubpage:"",zakuwanie: zakuwanie, currentUser: req.user})
-            });
+            
+            let header = `Danmag - części i akcesoria motoryzacyjne | ${zakuwanie.title} | Dodaj powód dlaczego tutaj`;
+            res.render("./whyHere/new", {header: header, zakuwanieSubpage:"",zakuwanie: zakuwanie, currentUser: req.user})
+            
             
         }
     })
@@ -65,10 +65,10 @@ router.get("/:whyHere_id/edit", isLoggedIn, (req, res) => {
                 if(err){
                     console.log(err)
                 } else {
-                    Danmag.findOne({username: admin_username}, (err, admin) => {
-                        let header = `Danmag - części i akcesoria motoryzacyjne | Zakuwanie | Edytuj dlaczego tutaj`;
-                        res.render("./whyHere/edit", {admin:admin,header: header, zakuwanieSubpage:"",zakuwanie: zakuwanie, whyHere:whyHere, currentUser: req.user})
-                    });
+                    
+                    let header = `Danmag - części i akcesoria motoryzacyjne | Zakuwanie | Edytuj dlaczego tutaj`;
+                    res.render("./whyHere/edit", {header: header, zakuwanieSubpage:"",zakuwanie: zakuwanie, whyHere:whyHere, currentUser: req.user})
+                    
                     
                 }
             })

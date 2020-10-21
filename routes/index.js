@@ -9,16 +9,16 @@ const express = require("express"),
     router = express.Router();
 
 app.use(flash());
-let admin_username = "Paweł";
+
  
 router.get("/", function(req, res){
 	News.find({}, function(err, news){
 		if(err) {
 			console.log(err);
 		} else {
-            Danmag.findOne({username: admin_username}, (err, admin) => {
-			    res.render("index" , {news:news, admin:admin, header: "Danmag-części i akcesoria motoryzacyjne | Start", main:"", currentUser: req.user});
-            });
+            
+			res.render("index" , {news:news, header: "Danmag-części i akcesoria motoryzacyjne | Start", main:"", currentUser: req.user});
+            
 			
 		}
 	});
@@ -149,7 +149,7 @@ router.get("/logout", function(req, res) {
 router.get("/login", function(req, res){
 	res.render("login", {header: "Danmag-części i akcesoria motoryzacyjne | Logowanie", currentUser: req.user})
 });
-/*
+
 router.get("/register", function(req, res){
 	res.render("register", {header: "Danmag-części i akcesoria motoryzacyjne | Rejestracja", currentUser: req.user})
 });
@@ -170,7 +170,7 @@ router.post("/register", function(req, res){
         });
     });
 });
-*/
+
 
 
 
@@ -178,18 +178,15 @@ router.post("/register", function(req, res){
 
 
 router.get("/privacy-policy", function(req, res){
-	Danmag.findOne({username: admin_username}, (err, admin) => {
-			    res.render("privacy" , {admin:admin, header: "Danmag-części i akcesoria motoryzacyjne | Polityka prywatności", currentUser: req.user});
-            });
-	
+	res.render("privacy", {header: "Danmag-części i akcesoria motoryzacyjne | Polityka prywatności", currentUser: req.user});
 });
 
 
 
 router.get("*", function(req, res){
-    Danmag.findOne({username: admin_username}, (err, admin) => {
-        res.render("error", {admin:admin,header: "Danmag-części i akcesoria motoryzacyjne | Strona nie istnieje"});
-    });
+    
+    res.render("error", {header: "Danmag-części i akcesoria motoryzacyjne | Strona nie istnieje"});
+    
 	
 });
 
