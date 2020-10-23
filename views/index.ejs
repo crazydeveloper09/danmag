@@ -7,13 +7,13 @@
         <div class="card" style="border: #1a1a1a">
           <div class="card-body" style="background-color: #1a1a1a">
             <div class="card-title info"><i class="fas fa-tools"></i> Prowadzimy usługę zakuwania przewodów hamulcowych</div>
-            <p class="info2" style="font-size: 15px;">Wykonujemy następujące przewody hamulcowe zgodne z D.O.T:</p>
+            <p class="info2">Wykonujemy następujące przewody hamulcowe zgodne z D.O.T:</p>
             <ul>
-              <li class="info2" style="font-size: 15px;">Miedziane i miedziano-niklowe</li>
-              <li class="info2" style="font-size: 15px;">Gumowe 1/8 DN z podwójnym zbrojeniem z włókna syntetycznego Sae J1401</li>
-              <li class="info2" style="font-size: 15px;">Teflonowe 1/8 DN w oplocie ze stali nierdzewnej</li>
+              <li class="info2">Miedziane i miedziano-niklowe</li>
+              <li class="info2">Gumowe 1/8 DN z podwójnym zbrojeniem z włókna syntetycznego Sae J1401</li>
+              <li class="info2">Teflonowe 1/8 DN w oplocie ze stali nierdzewnej</li>
             </ul>
-            <p class="info2" style="font-size: 15px;">Wszystkie przewody są atestowane i wykonane zgodnie z międzynarodowymi
+            <p class="info2">Wszystkie przewody są atestowane i wykonane zgodnie z międzynarodowymi
               normami. Jesteśmy oficjalnym partnerem amerykańskiego producenta
               węży i końcówek hamulcowych Brake Quip.
               </p>
@@ -70,17 +70,18 @@
 													<% if(typeof news[i].profile !== 'undefined'){ %>
 														<img src="<%= news[i].profile %>" alt="<%= news[i].title %> zdjęcie główne" class="card-img-top">
 													<% } %>
-												<br>
+												
+													
+												<div class="card-body" style="background-color: #1a1a1a">\
 													<div class="card-title info text-center">
-															<a href="/news/<%= news[i].more %>" style="color:#FBFA04"><%= news[i].title %></a> 
-														</div>
-												<div class="card-body" style="background-color: #1a1a1a">
+														<a href="/news/<%= news[i].more %>" style="color:#FBFA04"><%= news[i].title %></a> 
+													</div>
 														<p class="neutral"><%- news[i].opis %></p>
 														<% if(news[i].opis.length>200){ %>
 															<% if(typeof news[i].more !== 'undefined'){ %>
-																<a href="/news/<%= news[i].more %>" class="form" style="font-size: 15px;">Czytaj więcej...</a>
+																<a href="/news/<%= news[i].more %>" class="form">Czytaj więcej...</a>
 															<% } else { %>
-																<a href="/news/<%= news[i]._id %>" class="form" style="font-size: 15px;">Czytaj więcej...</a>
+																<a href="/news/<%= news[i]._id %>" class="form">Czytaj więcej...</a>
 															<% } %>
 															
 														<% } %>

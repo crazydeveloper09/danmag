@@ -3,11 +3,11 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                    <h1 class="info text-center">Aktualności</h1>
+                    <h1 class="info text-center" id="header">Aktualności</h1>
 				<br>
 				<form action="/news/search" method="get">
 					<div class="input-group mb-3">
-						<input type="search" id="news" class="form-control" name="title" placeholder="Wpisz tytuł aktualności" aria-label="Wpisz tytuł aktualności" aria-describedby="basic-addon2">
+						<input type="search" id="news" autocomplete="off" class="form-control" name="title" placeholder="Wpisz tytuł aktualności" aria-label="Wpisz tytuł aktualności" aria-describedby="basic-addon2">
 						<div class="input-group-append">
 							<button class="btn btn-warning" type="submit" style="border:none; background:none;border-bottom: 1px solid #FBFA04; color: #FBFA04"><i class="fas fa-search"></i></button>
 						</div>
@@ -29,26 +29,37 @@
                                
                             <% } else { %>
 								<div class="row">
-									<% for(let i=news.length-1;i>=0;i--){ %>
-										<div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 8px">
-											<div class="card" style="border: #1a1a1a;background-color: #1a1a1a">
-												
-												<% if(typeof news[i].profile !== 'undefined'){ %>
-													<img src="<%= news[i].profile %>" alt="<%= news[i].title %> zdjęcie główne" class="card-img-top">
-												<% } %>
-												<br>
-													<div class="card-title info text-center">
-															<a href="/news/<%= news[i].more %>" style="color:#FBFA04"><%= news[i].title %></a> 
-														</div>
-												<div class="card-body" style="background-color: #1a1a1a">
-														<p class="neutral"><%- news[i].opis %></p>
-														<% if(news[i].opis.length>200){ %>
-															<a href="/news/<%= news[i].more %>" class="form">Czytaj więcej...</a>
+									<div class="col-lg-12">
+										<div class="row" id="newsDisplay">
+											<% for(let i=news.length-1;i>=0;i--){ %>
+												<div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 8px">
+													<div class="card" style="border: #1a1a1a;background-color: #1a1a1a">
+														
+														<% if(typeof news[i].profile !== 'undefined'){ %>
+															<img src="<%= news[i].profile %>" alt="<%= news[i].title %> zdjęcie główne" class="card-img-top">
 														<% } %>
+														
+														<div class="card-body" style="background-color: #1a1a1a">
+															<div class="card-title info text-center">
+																<a href="/news/<%= news[i].more %>" style="color:#FBFA04"><%= news[i].title %></a> 
+															</div>
+																<p class="neutral"><%- news[i].opis %></p>
+																<% if(news[i].opis.length>200){ %>
+																	<a href="/news/<%= news[i].more %>" class="form">Czytaj więcej...</a>
+																<% } %>
+														</div>
+													</div>
 												</div>
-											</div>
+											<% } %>
 										</div>
-									<% } %>
+										
+									</div>
+									
+									<div class="col-lg-12">
+										<div class="row" id="newsSearch" style="display: none;">
+
+										</div>
+									</div>
 								</div>
                             <% } %>
                
@@ -63,6 +74,177 @@
 							"color": "#FBFA04"
 						});
 					});
-				</script>
+			</script>
+			<script>
+				let newsInput = document.getElementById("news");
+				let header = document.getElementById("header");
+				let newsDisplay = document.getElementById("newsDisplay");
+				let newsSearch = document.getElementById("newsSearch");
+				
+				news.addEventListener("keypress", (event) => {
 
+
+						axios
+							.get(`/news/search?title=${event.target.value}&type=asynchronous`)
+							.then((response) => {
+
+								console.log(event.target.value)
+								header.innerText = `Wyszukiwanie nowinek po parametrze ${event.target.value}: ${response.data.length}`;
+								if (response.data.length === 0) {
+									newsSearch.innerText = "";
+									
+									let alert = document.createElement("div")
+									alert.setAttribute("class", "alert alert-secondary text-center")
+									alert.innerText = `Nie znaleźliśmy nowinek dla parametru ${event.target.value}. Spróbuj ponownie`;
+									const column = document.createElement("div")
+									column.setAttribute("class", "col-lg-12")
+									column.appendChild(alert)
+									newsDisplay.style.display = "none";
+									newsSearch.style.display = "flex";
+									newsSearch.appendChild(column)
+								} else {
+									newsSearch.innerText = ""
+									response.data.forEach((news) => {
+										const column = document.createElement("div")
+										const card = document.createElement("div")
+										const newsImg = document.createElement("img")
+										const cardBody = document.createElement("div")
+										const cardTitle = document.createElement("div")
+										const newsDescription = document.createElement("p")
+										const aLinkTitle = document.createElement("a")
+										const moreButton = document.createElement("a")
+
+										column.setAttribute("class", "col-lg-4 col-md-6 col-sm-12")
+										column.style.marginTop = "8px";
+										if (news.profile) {
+											newsImg.setAttribute("src", news.profile)
+											newsImg.setAttribute("alt", `Zdjęcie główne`)
+											newsImg.setAttribute("class", "card-img-top")
+											card.appendChild(newsImg)
+										}
+										card.style.background = "#1a1a1a";
+										card.setAttribute("class", "card")
+										cardTitle.setAttribute("class", "card-title info text-center")
+										aLinkTitle.setAttribute("href", `/news/${news.more}`)
+										aLinkTitle.style.color = "#FBFA04";
+										aLinkTitle.innerText = news.title;
+										cardTitle.appendChild(aLinkTitle)
+										cardBody.appendChild(cardTitle)
+										newsDescription.setAttribute("class", "neutral")
+										newsDescription.innerHTML = news.opis;
+										cardBody.append(newsDescription)
+										cardBody.setAttribute("class", "card-body")
+										if (news.opis.length > 200) {
+											moreButton.setAttribute("class", "form")
+											moreButton.setAttribute("href", `/news/${news.more}`)
+											moreButton.innerText = "Czytaj więcej";
+											cardBody.append(moreButton)
+										}
+										card.appendChild(cardBody);
+										column.appendChild(card);
+										newsDisplay.style.display = "none";
+										newsSearch.style.display = "flex";
+										newsSearch.appendChild(column)
+
+									})
+								}
+							})
+							.catch((err) => {
+								let alert = document.createElement("div")
+								alert.setAttribute("class", "alert alert-secondary text-center")
+								alert.innerText = `Nie znaleźliśmy nowinek dla parametru ${event.target.value}. Spróbuj ponownie`;
+								console.log(alert)
+								newsDisplay.style.display = "none";
+								newsSearch.style.display = "flex";
+								newsSearch.appendChild(alert)
+							})
+
+
+
+					})
+				news.addEventListener("keyup", (event) => {
+					
+					if(event.target.value.length === 0){
+						news.setAttribute("placeholder", "Wpisz tytuł aktualności")
+						header.innerText = "Aktualności";
+						newsDisplay.style.display = "flex";
+						newsSearch.style.display = "none";
+					} else {
+						axios
+							.get(`/news/search?title=${event.target.value}&type=asynchronous`)
+							.then((response) => {
+
+								console.log(event.target.value)
+								header.innerText = `Wyszukiwanie nowinek po parametrze ${event.target.value}: ${response.data.length}`;
+								if (response.data.length === 0) {
+									newsSearch.innerText = "";
+									
+									let alert = document.createElement("div")
+									alert.setAttribute("class", "alert alert-secondary text-center")
+									alert.innerText = `Nie znaleźliśmy nowinek dla parametru ${event.target.value}. Spróbuj ponownie`;
+									const column = document.createElement("div")
+									column.setAttribute("class", "col-lg-12")
+									column.appendChild(alert)
+									newsDisplay.style.display = "none";
+									newsSearch.style.display = "flex";
+									newsSearch.appendChild(column)
+								} else {
+									newsSearch.innerText = ""
+									response.data.forEach((news) => {
+										const column = document.createElement("div")
+										const card = document.createElement("div")
+										const newsImg = document.createElement("img")
+										const cardBody = document.createElement("div")
+										const cardTitle = document.createElement("div")
+										const newsDescription = document.createElement("p")
+										const aLinkTitle = document.createElement("a")
+										const moreButton = document.createElement("a")
+
+										column.setAttribute("class", "col-lg-4 col-md-6 col-sm-12")
+										column.style.marginTop = "8px";
+										if (news.profile) {
+											newsImg.setAttribute("src", news.profile)
+											newsImg.setAttribute("alt", `Zdjęcie główne`)
+											newsImg.setAttribute("class", "card-img-top")
+											card.appendChild(newsImg)
+										}
+										card.style.background = "#1a1a1a";
+										card.setAttribute("class", "card")
+										cardTitle.setAttribute("class", "card-title info text-center")
+										aLinkTitle.setAttribute("href", `/news/${news.more}`)
+										aLinkTitle.style.color = "#FBFA04";
+										aLinkTitle.innerText = news.title;
+										cardTitle.appendChild(aLinkTitle)
+										cardBody.appendChild(cardTitle)
+										newsDescription.setAttribute("class", "neutral")
+										newsDescription.innerHTML = news.opis;
+										cardBody.append(newsDescription)
+										cardBody.setAttribute("class", "card-body")
+										if (news.opis.length > 200) {
+											moreButton.setAttribute("class", "form")
+											moreButton.setAttribute("href", `/news/${news.more}`)
+											moreButton.innerText = "Czytaj więcej";
+											cardBody.append(moreButton)
+										}
+										card.appendChild(cardBody);
+										column.appendChild(card);
+										newsDisplay.style.display = "none";
+										newsSearch.style.display = "flex";
+										newsSearch.appendChild(column)
+
+									})
+								}
+							})
+							.catch((err) => {
+								let alert = document.createElement("div")
+								alert.setAttribute("class", "alert alert-secondary text-center")
+								alert.innerText = `Nie znaleźliśmy nowinek dla parametru ${event.target.value}. Spróbuj ponownie`;
+								console.log(alert)
+								newsDisplay.style.display = "none";
+								newsSearch.style.display = "flex";
+								newsSearch.appendChild(alert)
+							})
+					}
+				})
+			</script>
 <% include ../partials/footer %>

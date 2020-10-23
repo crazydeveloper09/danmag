@@ -34,7 +34,7 @@ body {
 .info {
 	font-family: 'Nunito', sans-serif;
 	color: #FBFA04;
-	font-size: 20px;
+	font-size: 25px;
 	
 }
 #nav {
@@ -43,7 +43,7 @@ body {
 .info2 {
 	font-family: 'Nunito', sans-serif;
 	color: #FBFA04;
-	font-size: 18px;
+	font-size: 19px;
 	
 }
 #username,
@@ -118,7 +118,7 @@ input[type=time]::placeholder {
 .neutral {
 	font-family: 'Nunito', sans-serif;
 	color: white;
-	font-size: 15px;
+	font-size: 19px;
 }
 
 .nav-link {

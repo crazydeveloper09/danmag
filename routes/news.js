@@ -37,17 +37,26 @@ app.use(methodOverride("_method"));
 
 
 router.get("/search", function(req, res){
-	const regex = new RegExp(escapeRegex(req.query.title), 'gi');
-	News.find({title: regex}, function(err, foundedNews){
-		if(err){
-			console.log(err);
-		} else {
-			
-			res.render("./news/search", {news: foundedNews, currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Wyszukiwanie nowinek dla parametru: " + req.query.title, param: req.query.title})
-            
-			
-		}
-	});
+	if(req.query.type === "asynchronous"){
+		const regex = new RegExp(escapeRegex(req.query.title), 'gi');
+		News.find({title: regex}, function(err, foundedNews){
+			if(err){
+				console.log(err);
+			} else {
+				res.json(foundedNews)
+			}
+		});
+	} else {
+		const regex = new RegExp(escapeRegex(req.query.title), 'gi');
+		News.find({title: regex}, function(err, foundedNews){
+			if(err){
+				console.log(err);
+			} else {
+				res.render("./news/search", {news: foundedNews, currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Wyszukiwanie nowinek dla parametru: " + req.query.title, param: req.query.title})
+			}
+		});
+	}
+	
 });
 
 router.get("/new", isLoggedIn, function(req, res){

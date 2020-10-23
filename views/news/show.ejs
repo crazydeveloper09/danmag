@@ -9,15 +9,15 @@
             <% } %>
                    
                
-            <div class="card-title info text-center">
-                <br>
-                <%= news.title %>
-            </div>
+           
                 <div class="card-body">
                    
-                    
+                    <div class="card-title info text-center">
+                        
+                        <%= news.title %>
+                    </div>
                   
-                    <p class="neutralb"><%- news.opis %></p>
+                    <p class="neutral"><%- news.opis %></p>
                     <% if(typeof currentUser !== 'undefined'){ %>
                         <div class="dropdown">
                             <button class="form dropdown-toggle justify-content-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -62,7 +62,7 @@
                                 </div>
                             </div>
 							<br>
-                            <p class="neutralb"><%= news.underposts[i].opis %></p>
+                            <p class="neutral"><%= news.underposts[i].opis %></p>
                             <% if(typeof currentUser !== 'undefined'){ %>
                                 <div class="d-inline">
                                    

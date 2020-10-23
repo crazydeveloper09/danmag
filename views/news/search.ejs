@@ -36,11 +36,11 @@
 												<% if(typeof news[i].profile !== 'undefined'){ %>
 													<img src="<%= news[i].profile %>" alt="<%= news[i].title %> zdjęcie główne danej aktualności" class="card-img-top">
 												<% } %>
-												<br>
-													<div class="card-title info text-center">
-															<a href="/news/<%= news[i].more %>" style="color:#FBFA04"><%= news[i].title %></a> 
-														</div>
+												
 												<div class="card-body" style="background-color: #1a1a1a">
+													<div class="card-title info text-center">
+														<a href="/news/<%= news[i].more %>" style="color:#FBFA04"><%= news[i].title %></a> 
+													</div>
 														<p class="neutral"><%- news[i].opis %></p>
 														<% if(news[i].opis.length>200){ %>
 															<a href="/news/<%= news[i].more %>" class="form">Czytaj więcej...</a>
