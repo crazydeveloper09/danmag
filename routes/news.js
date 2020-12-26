@@ -191,8 +191,17 @@ router.get("/:id", function(req, res){
 		if(err) {
 			console.log(err);
 		} else {
-			let header = `${news.title} | Aktualności | Danmag-części i akcesoria motoryzacyjne`;
-			res.render("./news/show", {news: news, header: header, currentUser: req.user});
+			if(news) {
+				let header = `${news.title} | Aktualności | Danmag-części i akcesoria motoryzacyjne`;
+				res.render("./news/show", {news: news, header: header, currentUser: req.user});
+			} else {
+				
+				let header = `Strona nie istnieje | Danmag-części i akcesoria motoryzacyjne`;
+				res.render("error", {header: header, currentUser: req.user});
+    
+
+			}
+			
             
 			
 		}
