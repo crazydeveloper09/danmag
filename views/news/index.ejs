@@ -43,10 +43,18 @@
 															<div class="card-title info text-center">
 																<a href="/news/<%= news[i].more %>" style="color:#FBFA04"><%= news[i].title %></a> 
 															</div>
-																<p class="neutral"><%- news[i].opis %></p>
-																<% if(news[i].opis.length>200){ %>
+															<% if(news[i].opis.length>200){ %>
+																<% if(typeof news[i].more !== 'undefined'){ %>
+																	<p class="neutral"><%- news[i].opis.substring(0,200) %>...</p>
 																	<a href="/news/<%= news[i].more %>" class="form">Czytaj więcej...</a>
+																<% } else { %>
+																	<p class="neutral"><%- news[i].opis.substring(0,200) %></p>
+																	<a href="/news/<%= news[i]._id %>" class="form">Czytaj więcej...</a>
 																<% } %>
+										
+															<% } else { %>
+																<p class="neutral"><%- news[i].opis %></p>
+															<% } %>
 														</div>
 													</div>
 												</div>
@@ -131,14 +139,17 @@
 										cardTitle.appendChild(aLinkTitle)
 										cardBody.appendChild(cardTitle)
 										newsDescription.setAttribute("class", "neutral")
-										newsDescription.innerHTML = news.opis;
+										
 										cardBody.append(newsDescription)
 										cardBody.setAttribute("class", "card-body")
 										if (news.opis.length > 200) {
+											newsDescription.innerHTML = `${news.opis.substring(0, 200)}...`;
 											moreButton.setAttribute("class", "form")
 											moreButton.setAttribute("href", `/news/${news.more}`)
 											moreButton.innerText = "Czytaj więcej";
 											cardBody.append(moreButton)
+										} else {
+											newsDescription.innerHTML = news.opis;
 										}
 										card.appendChild(cardBody);
 										column.appendChild(card);
@@ -217,14 +228,17 @@
 										cardTitle.appendChild(aLinkTitle)
 										cardBody.appendChild(cardTitle)
 										newsDescription.setAttribute("class", "neutral")
-										newsDescription.innerHTML = news.opis;
+									
 										cardBody.append(newsDescription)
 										cardBody.setAttribute("class", "card-body")
 										if (news.opis.length > 200) {
+											newsDescription.innerHTML =`${news.opis.substring(0, 200)}...`;
 											moreButton.setAttribute("class", "form")
 											moreButton.setAttribute("href", `/news/${news.more}`)
 											moreButton.innerText = "Czytaj więcej";
 											cardBody.append(moreButton)
+										} else {
+											newsDescription.innerHTML = news.opis;
 										}
 										card.appendChild(cardBody);
 										column.appendChild(card);

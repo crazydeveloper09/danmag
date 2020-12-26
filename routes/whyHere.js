@@ -14,8 +14,7 @@ router.get("/redirect", isLoggedIn, (req, res) => {
         if(err){
             console.log(err)
         } else {
-            
-            let header = `Danmag - części i akcesoria motoryzacyjne | ${zakuwanie.title} | Redirect page`;
+            let header = `Redirect page | Powody dlaczego tutaj | ${zakuwanie.title} | Danmag-części i akcesoria motoryzacyjne`;
             res.render("./whyHere/redirect", {header: header, zakuwanieSubpage:"",zakuwanie: zakuwanie, currentUser: req.user})
             
            
@@ -29,8 +28,8 @@ router.get("/add", isLoggedIn, (req, res) => {
             console.log(err)
         } else {
             
-            let header = `Danmag - części i akcesoria motoryzacyjne | ${zakuwanie.title} | Dodaj powód dlaczego tutaj`;
-            res.render("./whyHere/new", {header: header, zakuwanieSubpage:"",zakuwanie: zakuwanie, currentUser: req.user})
+            let header = `Dodaj powód dlaczego tutaj | ${zakuwanie.title} | Danmag-części i akcesoria motoryzacyjne`;
+            res.render("./whyHere/new", {header: header, zakuwanie: zakuwanie})
             
             
         }
@@ -66,8 +65,8 @@ router.get("/:whyHere_id/edit", isLoggedIn, (req, res) => {
                     console.log(err)
                 } else {
                     
-                    let header = `Danmag - części i akcesoria motoryzacyjne | Zakuwanie | Edytuj dlaczego tutaj`;
-                    res.render("./whyHere/edit", {header: header, zakuwanieSubpage:"",zakuwanie: zakuwanie, whyHere:whyHere, currentUser: req.user})
+                    let header = `Edytuj powód dlaczego tutaj | ${zakuwanie.title} | Danmag-części i akcesoria motoryzacyjne`;
+                    res.render("./whyHere/edit", {header: header, zakuwanie: zakuwanie, whyHere:whyHere})
                     
                     
                 }

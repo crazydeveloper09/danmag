@@ -1,72 +1,78 @@
-body:before {
-	content: '';
-    background-size: cover;
-    background-position: center; 
-
-	background: url(volks.jpg) no-repeat;
-	background-attachment: fixed;
-	height: 100%;
-	width: 100%;
-	position: fixed;
-	
+body {
+  width: 100vw;
+  height: 100vh;
+  background:  #1a1a1a;
+}
+#info {
+  background:  #1a1a1a;
+  height: 100vh;
+}
+#form {
+  background:#262625;
+  height: 100vh;
 }
 
-body,
-html {
-    margin:0;
-	padding:0;
-   
- 
+a {
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
+  color:  white;
 }
 
-.form {
-    background: none;
-    padding: 6px 12px;
-    border: 1px solid #FBFA04;
-    color: #FBFA04;
-    border-radius: 5px;
-}
-.form:hover{
-    background: #FBFA04;
-    color: #1a1a1a;
-}
-.container {
-    filter: none;
+
+#form .login {
+  font-family: 'Nunito', sans-serif;
+  font-size: 45px;
+  font-weight: 700;
+  color: #FBFA04;
 }
 
-.card {
-    margin-top: 50%;
-}
-.info {
-	font-family: 'Nunito', sans-serif;
-	color: #FBFA04;
-	font-size: 25px;
-	font-weight: 700;
+#form .username {
+  font-family: 'Nunito', sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  color: white;
 }
 
-input[type=text],
-input[type=password],
-input[type=email] {
-    background: none;
-    border: 1px solid #FBFA04;
-   
-    color: #FBFA04;
-}
-
-input[type=text]::placeholder,
-input[type=password]::placeholder,
-input[type=email]::placeholder{
-    
-    color: #FBFA04;
-}
-
-.card {
-    opacity: 0.9;
+#form .button {
+  width: 100%;
+  margin-bottom: 15px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  
 }
 
 @media (max-width: 992px) {
-	.card {
-        margin-top: 5%;
-    }
-	
+  #info {
+      display: none;
+  }
+  #form1 {
+      margin: 4%;
+  }
+  body {
+    margin: 0;
+    background: #262625; 
+  }
+  .container-full {
+    margin: 0;
+  }
+}
+.btn-gradient {
+  background:   #FBFA04;
+  border: 1px solid  #FBFA04;
+  color: black;
+}
+#description_r {
+  color: #c9c7c7;
+  font-size:18px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.info {
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px;
+  color: white;
+}
+.btn-black {
+  background: #131314;
+  border: 1px solid  #131314;
 }

@@ -1,28 +1,31 @@
-<% include ../partials/headero %>
-<br>
-<br>
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card" style="background-color: #1a1a1a">
-                <div class="card-title text-center info">
+<%- include("../partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 10%">
+            <div id="form1">
+                <a href="/zakuwanie">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do strony Zakuwanie przewodów
+                </a>
+                <h1 class="login">Dodaj powód dlaczego serwis przewodów hamulcowych jest tak ważny</h1>
+                <% if(error.length > 0){ %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
+                </div>
+                <% } %>
+                <form action="/zakuwanie/<%= zakuwanie._id %>/whySoImportant" method="post">
+
+                    <p class="username">Wpisz opis powodu</p>
+                    <textarea name="text" id="description" class="form-control"
+                        placeholder="Powód dlaczego serwis przewodów hamulcowych jest tak ważny"></textarea>
                     <br>
-                    Dodaj powód dlaczego serwis przewodów hamulcowych jest tak ważny
-                </div>
-                <div class="card-body">
-                        <form action="/zakuwanie/<%= zakuwanie._id %>/whySoImportant" method="post">
-                            
-                            <p class="info2">Wpisz opis powodu</p>
-                            <textarea name="text" id="description" class="form-control" placeholder="Powód dlaczego serwis przewodów hamulcowych jest tak ważny"></textarea>
-                            <br>
-                           
-                            <input type="submit" value="Dodaj powód" class="form">
-                        </form>
-                </div>
+
+                    <input type="submit" value="Dodaj powód" class="btn btn-warning button btn-gradient">
+                </form>
             </div>
-            
         </div>
+
     </div>
 </div>
-<% include ../partials/footer %>
+</body>
+</html>

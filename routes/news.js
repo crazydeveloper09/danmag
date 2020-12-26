@@ -52,7 +52,8 @@ router.get("/search", function(req, res){
 			if(err){
 				console.log(err);
 			} else {
-				res.render("./news/search", {news: foundedNews, currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Wyszukiwanie nowinek dla parametru: " + req.query.title, param: req.query.title})
+				let header = `Wyszukiwanie aktualności dla parametru ${req.query.type} | Danmag-części i akcesoria motoryzacyjne`;
+				res.render("./news/search", {news: foundedNews, currentUser: req.user, header: header, param: req.query.title})
 			}
 		});
 	}
@@ -64,7 +65,8 @@ router.get("/new", isLoggedIn, function(req, res){
 		if(err) {
 			console.log(err);
 		} else {
-			res.render("./news/new" , {news:news, header:"Danmag - części i akcesoria motoryzacyjne | Nowa aktualność"});
+			let header = `Dodaj aktualność | Danmag-części i akcesoria motoryzacyjne`;
+			res.render("./news/new" , {news:news, header: header});
 		}
 	});
 	
@@ -74,8 +76,8 @@ router.get("/", function(req, res){
 		if(err) {
 			console.log(err);
 		} else {
-			
-			res.render("./news/index", {news:news, header: "Danmag-części i akcesoria motoryzacyjne | Nowinki", newse:"", currentUser: req.user});
+			let header = `Aktualności | Danmag-części i akcesoria motoryzacyjne`;
+			res.render("./news/index", {news:news, header: header, newse:"", currentUser: req.user});
             
 			
 		}
@@ -89,8 +91,8 @@ router.get("/:id/edit/picture", isLoggedIn, function(req, res){
 		if(err) {
 			console.log(err);
 		} else {
-			
-			res.render("./news/editP", {news: news, header: `Danmag-części i akcesoria motoryzacyjne |  Aktualności | ${ news.title } Edytowanie zdjęcia głównego`, currentUser: req.user});
+			let header = `Edytuj zdjęcie główne ${news.title} | Aktualności | Danmag-części i akcesoria motoryzacyjne`;
+			res.render("./news/editP", {news: news, header: header});
             
 			
 		}
@@ -102,8 +104,8 @@ router.get("/:id/new/picture", isLoggedIn, function(req, res){
 		if(err) {
 			console.log(err);
 		} else {
-			
-			res.render("./news/addP", {news: news, header: `Danmag-części i akcesoria motoryzacyjne | Aktualności | ${ news.title } | Dodaj zdjęcie do galerii`, currentUser: req.user});
+			let header = `Dodaj zdjęcie do galerii ${news.title} | Aktualności | Danmag-części i akcesoria motoryzacyjne`;
+			res.render("./news/addP", {news: news, header: header});
             
 			
 		}
@@ -175,8 +177,8 @@ router.get("/:id/edit", isLoggedIn, function(req, res){
 		if(err) {
 			console.log(err);
 		} else {
-			
-			res.render("./news/edit", {news: news, header: "Danmag-części i akcesoria motoryzacyjne | Edytowanie nowinki", currentUser: req.user});
+			let header = `Edytuj ${news.title} | Aktualności | Danmag-części i akcesoria motoryzacyjne`;
+			res.render("./news/edit", {news: news, header: header});
             
 			
 		}
@@ -189,8 +191,8 @@ router.get("/:id", function(req, res){
 		if(err) {
 			console.log(err);
 		} else {
-			
-			res.render("./news/show", {news: news, header: "Danmag-części i akcesoria motoryzacyjne | " + news.title, currentUser: req.user});
+			let header = `${news.title} | Aktualności | Danmag-części i akcesoria motoryzacyjne`;
+			res.render("./news/show", {news: news, header: header, currentUser: req.user});
             
 			
 		}

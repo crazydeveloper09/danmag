@@ -16,8 +16,8 @@ router.get("/", function(req, res){
 		if(err) {
 			console.log(err);
 		} else {
-            
-			res.render("index" , {news:news, header: "Danmag-części i akcesoria motoryzacyjne | Start", main:"", currentUser: req.user});
+            let header = `Start | Danmag-części i akcesoria motoryzacyjne`;
+			res.render("index" , {news:news, header: header, main:"", currentUser: req.user});
             
 			
 		}
@@ -29,7 +29,8 @@ router.get("/", function(req, res){
 
 
 router.get("/forgot", function(req, res){
-    res.render("forgot", {header:"Danmag - części i akcesoria motoryzacyjne | Poproś o zmianę hasła"});
+    let header = `Poproś o zmianę hasła | Danmag-części i akcesoria motoryzacyjne`;
+    res.render("forgot", {header: header});
 });
 
 router.post("/forgot", function(req, res, next){
@@ -85,7 +86,8 @@ router.get("/reset/:token", function(req, res){
             req.flash("error", "Token wygasł lub jest niepoprawny");
             return res.redirect("/forgot");
         }
-        res.render("reset", { token: req.params.token, header:"Danmag - części i akcesoria motoryzacyjne | Resetuj hasło" });
+        let header = `Resetuj hasło | Danmag-części i akcesoria motoryzacyjne`;
+        res.render("reset", { token: req.params.token, header: header });
     });
 });
 
@@ -136,22 +138,32 @@ router.post("/reset/:token", function(req, res){
     });
 });
 
-router.post("/login", passport.authenticate("local", {
-    failureRedirect: "/login",
-    failureFlash: true
-}), function(req, res) {
-    res.redirect(req.query.return_route)
+router.post("/login",function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+      if (err) { return next(err); }
+      if (!user) { 
+         req.flash("error", "Zła nazwa użytkownika lub hasło");
+          return res.redirect(`/login?return_route=${req.query.return_route}`); 
+        }
+      req.logIn(user, function(err) {
+        if (err) { return next(err); }
+        return res.redirect(req.query.return_route);
+      });
+    })(req, res, next);
+    
 });
 router.get("/logout", function(req, res) {
     req.logout();
     res.redirect("/login");
 });
 router.get("/login", function(req, res){
-	res.render("login", {header: "Danmag-części i akcesoria motoryzacyjne | Logowanie", currentUser: req.user})
+    let header = `Logowanie | Danmag-części i akcesoria motoryzacyjne`;
+	res.render("login", {header: header})
 });
 
 router.get("/register", function(req, res){
-	res.render("register", {header: "Danmag-części i akcesoria motoryzacyjne | Rejestracja", currentUser: req.user})
+    let header = `Rejestracja | Danmag-części i akcesoria motoryzacyjne`;
+	res.render("register", {header: header})
 });
 
 router.post("/register", function(req, res){
@@ -161,8 +173,8 @@ router.post("/register", function(req, res){
     });
     Danmag.register(newUser, req.body.password, function(err, user) {
         if(err) {
-            
-            return res.render("register", {header: "Danmag-części i akcesoria motoryzacyjne | Rejestracja"});
+            let header = `Rejestracja | Danmag-części i akcesoria motoryzacyjne`;
+            return res.render("register", {header: header});
         } 
         passport.authenticate("local")(req, res, function() {
             
@@ -178,14 +190,15 @@ router.post("/register", function(req, res){
 
 
 router.get("/privacy-policy", function(req, res){
-	res.render("privacy", {header: "Danmag-części i akcesoria motoryzacyjne | Polityka prywatności", currentUser: req.user});
+    let header = `Polityka prywatności | Danmag-części i akcesoria motoryzacyjne`;
+	res.render("privacy", {header: header, currentUser: req.user});
 });
 
 
 
 router.get("*", function(req, res){
-    
-    res.render("error", {header: "Danmag-części i akcesoria motoryzacyjne | Strona nie istnieje"});
+    let header = `Strona nie istnieje | Danmag-części i akcesoria motoryzacyjne`;
+    res.render("error", {header: header, currentUser: req.user});
     
 	
 });

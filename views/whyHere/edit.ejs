@@ -1,30 +1,35 @@
-<% include ../partials/headero %>
-<br>
-<br>
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card" style="background-color: #1a1a1a">
-                <div class="card-title text-center info">
+<%- include("../partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 10%">
+            <div id="form1">
+                <a href="/zakuwanie">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do strony Zakuwanie przewodów
+                </a>
+                <h1 class="login"> Edytuj powód dlaczego wykonać serwis w Danmag</h1>
+                <% if(error.length > 0){ %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
+                </div>
+                <% } %>
+
+                <form action="/zakuwanie/<%= zakuwanie._id %>/whyHere/<%= whyHere._id %>?_method=PUT" method="post">
+                    <p class="username">Edytuj tytuł powodu</p>
+                    <input type="text" name="whyHere[title]" value="<%= whyHere.title %>" placeholder="Tytuł powodu"
+                        class="form-control">
                     <br>
-                    Edytuj powód dlaczego wykonać serwis w Danmag
-                </div>
-                <div class="card-body">
-                        <form action="/zakuwanie/<%= zakuwanie._id %>/whyHere/<%= whyHere._id %>?_method=PUT" method="post">
-                            <p class="info2">Edytuj tytuł powodu</p>
-                            <input type="text" name="whyHere[title]" value="<%= whyHere.title %>" placeholder="Tytuł powodu" class="form-control">
-                            <br>
-                            <p class="info2">Edytuj opis powodu</p>
-                            <textarea name="whyHere[description]" id="description" class="form-control" placeholder="Powód dlaczego wykonać serwis w Danmag"><%= whyHere.description %></textarea>
-                            <br>
-                           
-                            <input type="submit" value="Edytuj powód" class="form">
-                        </form>
-                </div>
+                    <p class="username">Edytuj opis powodu</p>
+                    <textarea name="whyHere[description]" id="description" class="form-control"
+                        placeholder="Powód dlaczego wykonać serwis w Danmag"><%= whyHere.description %></textarea>
+                    <br>
+
+                    <input type="submit" value="Edytuj powód" class="btn btn-warning button btn-gradient">
+                </form>
             </div>
-            
         </div>
+
     </div>
 </div>
-<% include ../partials/footer %>
+</body>
+</html>

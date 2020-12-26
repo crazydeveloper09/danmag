@@ -1,29 +1,36 @@
-<% include ../partials/headero %>
-<br>
-<div class="container" id="addUnderpost">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card" style="border: #1a1a1a">
-                <div class="card-body" style="background-color: #1a1a1a">
-                    <div class="card-title info text-center">Wyślij ofertę na email <%= offer.email %></div>
-                   
-                    <form action="/offer/applications/<%= offer._id %>/send" method="post">
-                       
-                        <p class="info2">Wpisz tytuł emaila</p>
-                        <input type="text" name="topic" placeholder="Tytuł emaila" class="form-control">
-                        <br>
-                        <p class="info2">Wpisz treść emaila</p>
-                        <textarea class="form-control" name="text" id="description" placeholder="Treść emaila"></textarea>
-                        <br>
-                        
-                        
-                        <input type="submit" value="Wyślij ofertę" class="form">
-                    </form>
-                  
+<%- include("../partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 10%">
+            <div id="form1">
+                <a href="/offer/applications">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do wszystkich ofert
+                </a>
+                <h1 class="login">Wyślij ofertę na email <%= offer.email %></h1>
+                <% if(error.length > 0){ %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
                 </div>
+                <% } %>
+
+
+                <form action="/offer/applications/<%= offer._id %>/send" method="post">
+
+                    <p class="username">Wpisz tytuł emaila</p>
+                    <input type="text" name="topic" placeholder="Tytuł emaila" class="form-control">
+                    <br>
+                    <p class="username">Wpisz treść emaila</p>
+                    <textarea class="form-control" name="text" id="description" placeholder="Treść emaila"></textarea>
+                    <br>
+
+
+                    <input type="submit" value="Wyślij ofertę" class="btn btn-warning button btn-gradient">
+                </form>
+
             </div>
         </div>
     </div>
 </div>
-
-<% include ../partials/footer %>
+</body>
+</html>

@@ -10,8 +10,8 @@ app.use(flash());
 
 
 router.get("/new", function(req, res){
-	
-	res.render("./offer/new", {currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Zapytaj o ofertę", offer:"" });
+	let header = `Zapytaj o ofertę | Danmag-części i akcesoria motoryzacyjne`;
+	res.render("./offer/new", {header: header });
 	
 	
 });
@@ -26,7 +26,8 @@ router.get("/search", isLoggedIn, (req, res) => {
 		if(err){
 			console.log(err)
 		} else {
-			res.render("./offer/search", {currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Zapytania o ofertę | Wyszukiwanie", param: req.query.search, offers:offers})
+			let header = `Wyszukiwanie | Zapytania o ofertę | Danmag-części i akcesoria motoryzacyjne`;
+			res.render("./offer/search", {currentUser: req.user, header: header, param: req.query.search, offers:offers})
 		}
 	})
 })
@@ -91,8 +92,8 @@ router.get("/", isLoggedIn, (req, res) => {
 		if(err){
 			console.log(err);
 		} else {
-			
-			res.render("./offer/index", {currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Zapytania o ofertę", offers:offers})
+			let header = `Zapytania ofertę | Danmag-części i akcesoria motoryzacyjne`;
+			res.render("./offer/index", {currentUser: req.user, header: header, offers:offers})
             
 			
 		}
@@ -105,8 +106,8 @@ router.get("/:id/send", isLoggedIn, (req, res) => {
 		if(err){
 			console.log(err)
 		} else {
-			
-			res.render("./offer/send", {currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Zapytania o ofertę | Wyślij ofertę", offer:offer})
+			let header = `Wyślij ofertę | Zapytania o ofertę | Danmag-części i akcesoria motoryzacyjne`;
+			res.render("./offer/send", { header: header, offer:offer})
             
 			
 		}
@@ -151,7 +152,7 @@ router.post("/offer/:id/send", isLoggedIn, (req, res) => {
             
         }
     ], function(err){
-        res.redirect("");
+        res.redirect("/offer/applications");
     });
 })
 
@@ -160,7 +161,7 @@ router.get("/:id/delete", isLoggedIn, (req, res) => {
 		if(err){
 			console.log(err)
 		} else {
-			res.redirect("")
+			res.redirect("/offer/applications")
 		}
 	})
 });

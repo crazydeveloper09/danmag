@@ -21,14 +21,16 @@ let geocoder = NodeGeocoder(options);
 
 router.get("/", function(req, res){
     Danmag.findOne({username: admin_username}, (err, admin) => {
-        res.render("./user/show", {admin:admin,header: "Danmag-części i akcesoria motoryzacyjne | O firmie", about:"", currentUser: req.user});
+        let header = `O firmie | Danmag-części i akcesoria motoryzacyjne`;
+        res.render("./user/show", {admin:admin,header: header, about:"", currentUser: req.user});
     });
 	
 });
 
 router.get("/contact", function(req, res){
     Danmag.findOne({username: admin_username}, (err, admin) => {
-        res.render("./user/contact", {admin:admin,header: "Danmag-części i akcesoria motoryzacyjne | Kontakt",about:"", contact:"", currentUser: req.user});
+        let header = `Kontakt | Danmag-części i akcesoria motoryzacyjne`;
+        res.render("./user/contact", {admin:admin,header: header,about:"", contact:"", currentUser: req.user});
     });
 	
 });
@@ -38,8 +40,8 @@ router.get("/:id/edit", isLoggedIn, (req, res) => {
         if(err){
             console.log(err);
         } else {
-           
-            res.render("./user/edit", {user:user,header: "Danmag-części i akcesoria motoryzacyjne | Edytuj użytkownika",about:"", contact:"", currentUser: req.user});
+            let header = `Edytuj użytkownika ${user.username} | Danmag-części i akcesoria motoryzacyjne`;
+            res.render("./user/edit", {user:user,header: header,about:"", contact:"", currentUser: req.user});
             
             
         }

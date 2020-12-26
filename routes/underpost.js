@@ -35,8 +35,15 @@ app.use(flash());
 app.use(methodOverride("_method"));
 let admin_username = "Admin";
 router.get("/new", isLoggedIn, function(req, res){
+	News.findById(req.params.news_id, (err, news) => {
+		if(err){
+			console.log(err)
+		} else {
+			let header = `Dodaj podpost | ${news.title} | Aktualności | Danmag-części i akcesoria motoryzacyjne`;
+			res.render("./underposts/new", {header: header, news: news})
+		}
+	})
 	
-	res.render("./underposts/new", {currentUser: req.user, header: "Danmag-części i akcesoria motoryzacyjne | Dodawanie podposta", news_id: req.params.news_id})
 	
 	
 });
@@ -46,8 +53,15 @@ router.get("/:underpost_id/edit", isLoggedIn, function(req, res){
 		if(err){
 			console.log(err)
 		} else {
+			News.findById(req.params.news_id, (err, news) => {
+				if(err){
+					console.log(err)
+				} else {
+					let header = `Edytuj podpost ${underpost.title} | ${news.title} | Aktualności | Danmag-części i akcesoria motoryzacyjne`;
+					res.render("./underposts/edit", {news: news, header: header, underpost: underpost})
+				}
+			})
 			
-			res.render("./underposts/edit", {currentUser: req.user, news_id: req.params.news_id, header: "Danmag - części i akcesoria motoryzacyjne | Edytowanie podpostu", underpost: underpost})
 			
 			
 		}

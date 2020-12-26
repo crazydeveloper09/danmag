@@ -1,69 +1,54 @@
-<% include ../partials/header %>
-<br>
-    <div class="container">
-        <div class="row">
-            
-		
-			
-		</div>
-            
-               
-                           
-								<div class="row">
-									
-										<div class="col-lg-12" style="margin-top: 8px">
-											<div class="card" style="border: #1a1a1a;background-color: #1a1a1a">
-												
-												
-													<div class="card-title info text-center">
-                                                        <br>
-														Zapytaj o ofertę - formularz
-													</div>
-												<div class="card-body" style="background-color: #1a1a1a">
-													<div class="row justify-content-center">
-                                                        <div class="col-lg-6 col-md-12">
-                                                            <form action="/offer/applications" method="post">
-                                                                <p class="info2">Wpisz markę samochodu</p>
-                                                                <input type="text" name="brand" placeholder="Marka samochodu" class="form-control">
-                                                                <br>
-                                                                <p class="info2">Wpisz model samochodu</p>
-                                                                <input type="text" name="model" placeholder="Model samochodu" class="form-control">
-                                                                <br>
-                                                                <p class="info2">Wpisz pojemność silnika</p>
-                                                                <input type="text" name="engine" placeholder="Pojemność silnika" id="" class="form-control">
-                                                                <br>
-                                                                <p class="info2">Wpisz rok produkcji</p>
-                                                                <input type="number" name="year" placeholder="Rok produkcji" class="form-control">
-                                                                <br>
-                                                                <p class="info2">Wpisz rodzaj części</p>
-                                                                <input type="text" name="part" placeholder="Rodzaj części" class="form-control">
-                                                                <br>
-                                                                <p class="info2">Podaj adres email na który chcesz otrzymać ofertę</p>
-                                                                <input type="email" name="email" placeholder="Adres email" class="form-control">
-                                                                <br>
-                                                                <input type="submit" value="Zapytaj o ofertę" class="form">
-                                                            </form>
-                                                        </div>
-                                                    </div>
-												</div>
-											</div>
-										</div>
-									
-								</div>
-                            
-               
-                   
+<%- include("../partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form" style="height: 100%;">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 6%">
+            <div id="form1">
+                <a href="/">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do strony głównej
+                </a>
+                <h1 class="login">Podaj dokładne dane samochodu w poniższym formularzu</h1>
+                <% if(error.length > 0){ %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
+                </div>
+                <% } %>
+                <form action="/offer/applications" method="post">
+                    <p class="username"> Marka samochodu</p>
+					
+					<input type="text" name="brand" placeholder="np. Volkswagen" class="form-control" required>
+					
+					
+					<br>
+					<p class="username">Model samochodu</p>
+					<input type="text" name="model" placeholder="np. Golf 3" class="form-control" required>
+					<br>
+					<p class="username">Pojemność silnika</p>
+					<input type="text" name="engine" placeholder="np. 2.2 TDI" id="" class="form-control" required>
+					<br>
+					<p class="username">Rodzaj silnika</p>
+					<select name="category" id="select" class="form-control" required>
+						<option style="color:black">Benzyna</option>
+						<option style="color:black">Diesel</option>
+					</select>
+					<br>
+					<p class="username">Rok produkcji</p>
+					<input type="number" name="year" placeholder="np. 2010" class="form-control" required>
+					<br>
+					<p class="username">Numer VIN</p>
+					<input type="text" name="vin" placeholder="np. LA2YZ23J9P4800003" maxlength="17" class="form-control" required>
+					<br>
+					<p class="username">Rodzaj części</p>
+					<input type="text" name="part" placeholder="np. Płyn hamulcowy" class="form-control" required>
+					<br>
+					<p class="username">Adres email na który chcesz otrzymać ofertę</p>
+					<input type="email" name="email" placeholder="np. jankowalski@gmail.com" class="form-control" required>
+					<br>
+                    <input type="submit" value="Zapytaj o ofertę" class="btn btn-warning button btn-gradient">
+                </form>
             </div>
-           
-            
-        	<script>
-					    $(".form-control").on('click', function(){
-                            $(".form-control").css({
-                                "background": "none",
-                                "color": "#FBFA04"
-                                
-                            });
-                        });
-				</script>
-
-<% include ../partials/footer %>
+        </div>
+    </div>
+</div>
+</body>
+</html>

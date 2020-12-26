@@ -28,7 +28,7 @@
                                 <a class="dropdown-item" href="/news/<%= news._id %>/delete">Usuń</a>
                                 <a class="dropdown-item" href="/news/<%= news._id %>/edit/picture">Edytuj zdjęcie główne</a>
                                 <a class="dropdown-item" href="/news/<%= news._id %>/new/picture">Dodaj do galerii</a>
-                                <a class="dropdown-item" href="/news/<%= news.more %>/underposts/new">Dodaj podpost</a>
+                                <a class="dropdown-item" href="/news/<%= news._id %>/underposts/new">Dodaj podpost</a>
                                
                                 
                                 
@@ -66,8 +66,8 @@
                             <% if(typeof currentUser !== 'undefined'){ %>
                                 <div class="d-inline">
                                    
-                                    <a href="/news/<%= news.more %>/underposts/<%= news.underposts[i]._id %>/edit" class="btn btn-secondary">Edytuj podpost</a>
-                                    <a href="/news/<%= news.more %>/underposts/<%= news.underposts[i]._id %>/delete" class="btn btn-dark">Usuń podpost</a>
+                                    <a href="/news/<%= news._id %>/underposts/<%= news.underposts[i]._id %>/edit" class="btn btn-secondary">Edytuj podpost</a>
+                                    <a href="/news/<%= news._id %>/underposts/<%= news.underposts[i]._id %>/delete" class="btn btn-dark">Usuń podpost</a>
                                 </div>
                              <% } %>
                              <% if(news.underposts[i].title === "Valvoline SynPower - dla silników o dużej mocy"){ %>

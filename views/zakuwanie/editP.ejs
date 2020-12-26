@@ -1,24 +1,29 @@
-<% include ../partials/headero %>
-    <br>
-    <br>
-    <br>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card" style="border: #1a1a1a">
-                <div class="card-body" style="background-color: #1a1a1a">
-                    <div class="card-title info text-center">Edytuj zdjęcie do <%= zakuwanie.title %></div>
-                    <form action="/zakuwanie/<%= zakuwanie._id %>/edit/picture" method="post" enctype="multipart/form-data">
-                        
-                        <p class="info2">Wybierz zdjęcie</p>
-                        <input type="file" name="picture" style="color: #FBFA04">
-                        <br>
-                        <br>
-                        <input type="submit" class="form" value="Edytuj zdjęcie do <%= zakuwanie.title %>">
-                    </form>
+<%- include("../partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 10%">
+            <div id="form1">
+                <a href="/zakuwanie">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do strony Zakuwanie przewodów
+                </a>
+                <h1 class="login">Edytuj zdjęcie główne do <%= zakuwanie.title %></h1>
+                <% if(error.length > 0){ %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
                 </div>
+                <% } %>
+                <form action="/zakuwanie/<%= zakuwanie._id %>/edit/picture" method="post" enctype="multipart/form-data">
+
+                    <p class="username">Wybierz zdjęcie</p>
+                    <input type="file" name="picture" style="color: white">
+                    <br>
+                    <br>
+                    <input type="submit" class="btn btn-warning button btn-gradient" value="Edytuj zdjęcie do <%= zakuwanie.title %>">
+                </form>
             </div>
         </div>
     </div>
 </div>
-<% include ../partials/footer %>
+</body>
+</html>

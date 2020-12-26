@@ -1,34 +1,57 @@
-<% include ../partials/headero %>
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card" style="border: #1a1a1a">
-                <div class="card-body" style="background-color: #1a1a1a">
-                    <div class="card-title info text-center">Edytuj <%= news.title %></div>
-                    <form action="/news/<%= news._id %>?_method=PUT" method="post">
-                        <p class="info2">Edytuj tytuł aktualności</p>
-                        <input type="text" name="news[title]" placeholder="Tytuł aktualności" value="<%= news.title %>" class="form-control">
-                        <br>
-                        <p class="info2">Edytuj opis aktualności</p>
-                        <textarea class="form-control" name="news[opis]" placeholder="Opis aktualności" id="description"><%= news.opis %></textarea>
-                        <br>
-                        
-                        <br>
-                        <input type="submit" class="form" value="Edytuj aktualność">
-                    </form>
-					<br>
-                        <ul class="info2">
-                            Poradnik formatowania tekstu:
-                            <li>pogrubienie -  <pre style="color:#FBFA04"> <code> <span> &lt;strong&gt; wyraz lub wyrażenie &lt;/strong&gt; </span> </code>  </pre></li>
-                            <li>pochylenie -  <pre style="color:#FBFA04"> <code> <span> &lt;em&gt; wyraz lub wyrażenie &lt;/em&gt; </span> </code>  </pre></li>
-                            <li>podkreślenie -  <pre style="color:#FBFA04"> <code> <span> &lt;ins&gt; wyraz lub wyrażenie &lt;/ins&gt; </span> </code>  </pre></li>
-                            <li>przekreślenie -  <pre style="color:#FBFA04"> <code> <span> &lt;del&gt; wyraz lub wyrażenie &lt;/del&gt; </span> </code>  </pre></li>
-                            <li>akapity -  <pre style="color:#FBFA04"> <code> <span> &lt;br&gt; </span> </code>  </pre></li>
-                        </ul>
+<%- include("../partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form" style="height: 100%;">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 6%">
+            <div id="form1">
+                <a href="/news/<%= news.more %>">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do strony aktualności <%= news.title %>
+                </a>
+                <h1 class="login">Edytuj aktualność <%= news.title %></h1>
+                <% if(error.length > 0){ %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
                 </div>
+                <% } %>
+
+                <form action="/news/<%= news._id %>?_method=PUT" method="post">
+                    <p class="username">Edytuj tytuł aktualności</p>
+                    <input type="text" name="news[title]" placeholder="Tytuł aktualności" value="<%= news.title %>"
+                        class="form-control">
+                    <br>
+                    <p class="username">Edytuj opis aktualności</p>
+                    <textarea class="form-control" name="news[opis]" placeholder="Opis aktualności" id="description"><%= news.opis %></textarea>
+                    <br>
+
+                    
+                    <input type="submit" class="btn btn-warning button btn-gradient" value="Edytuj aktualność">
+                </form>
+                <br>
+                <ul class="info">
+                    Poradnik formatowania tekstu:
+                    <li>pogrubienie -
+                        <pre
+                            style="color:white"> <code> <span> &lt;strong&gt; wyraz lub wyrażenie &lt;/strong&gt; </span> </code>  </pre>
+                    </li>
+                    <li>pochylenie -
+                        <pre
+                            style="color:white"> <code> <span> &lt;em&gt; wyraz lub wyrażenie &lt;/em&gt; </span> </code>  </pre>
+                    </li>
+                    <li>podkreślenie -
+                        <pre
+                            style="color:white"> <code> <span> &lt;ins&gt; wyraz lub wyrażenie &lt;/ins&gt; </span> </code>  </pre>
+                    </li>
+                    <li>przekreślenie -
+                        <pre
+                            style="color:white"> <code> <span> &lt;del&gt; wyraz lub wyrażenie &lt;/del&gt; </span> </code>  </pre>
+                    </li>
+                    <li>akapity -
+                        <pre style="color:white"> <code> <span> &lt;br&gt; </span> </code>  </pre>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
-<% include ../partials/footer %>
+</body>
+</html>

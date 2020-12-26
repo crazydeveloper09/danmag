@@ -126,15 +126,11 @@
         		<a class="nav-link" href="/news"><i class="fas fa-newspaper"></i> Aktualności</a>
       		</li>
 		<% } %>
-		<% if(typeof offer !== 'undefined'){ %>
-			<li class="nav-item">
-        		<a class="nav-link" href="/offer/applications/new" style="color:#FBFA04"><i class="far fa-question-circle"></i> Zapytaj o ofertę</a>
-      		</li>
-		<% } else { %>
+		
 			<li class="nav-item">
 				<a class="nav-link" href="/offer/applications/new"><i class="far fa-question-circle"></i> Zapytaj o ofertę</a>
 			</li>
-		<% } %>
+		
 		<% if(typeof currentUser !== 'undefined'){ %>
 			<li class="nav-item">
 				<div class="dropdown">

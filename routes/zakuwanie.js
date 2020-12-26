@@ -41,8 +41,8 @@ router.get("/new", isLoggedIn, function(req, res){
 		if(err) {
 			console.log(err);
 		} else {
-			
-			res.render("./zakuwanie/new" , {currentUser: req.user, header:"Danmag - części i akcesoria motoryzacyjne | Nowe zakuwanie"});
+			let header = `Dodaj podstronę zakuwanie przewodów | Danmag-części i akcesoria motoryzacyjne`;
+			res.render("./zakuwanie/new" , {header: header});
 		}
 	});
 	
@@ -92,8 +92,8 @@ router.get("/:id/edit/picture", isLoggedIn, function(req, res){
 		if(err) {
 			console.log(err);
 		} else {
-			
-			res.render("./zakuwanie/editP", {zakuwanie: zakuwanie, header: "Danmag-części i akcesoria motoryzacyjne | Edytowanie zdjęcia głównego", currentUser: req.user});
+			let header = `Edytuj zdjęcie główne | Zakuwanie przewodów | Danmag-części i akcesoria motoryzacyjne`;
+			res.render("./zakuwanie/editP", {zakuwanie: zakuwanie, header: header});
 			
 			
 		}
@@ -105,8 +105,8 @@ router.get("/:id/new/picture", upload.single('picture'), function(req, res){
 		if(err) {
 			console.log(err);
 		} else {
-			
-			res.render("./zakuwanie/addP", {zakuwanie: zakuwanie, header: "Danmag-części i akcesoria motoryzacyjne | Zakuwanie | Do0daj zdjęcie do galerii", currentUser: req.user});
+			let header = `Dodaj zdjęcie do galerii | Zakuwanie przewodów | Danmag-części i akcesoria motoryzacyjne`;
+			res.render("./zakuwanie/addP", {zakuwanie: zakuwanie, header: header});
 			
 			
 		}
@@ -136,8 +136,8 @@ router.get("/:id/edit", isLoggedIn, function(req, res){
 		if(err) {
 			console.log(err);
 		} else {
-			
-			res.render("./zakuwanie/edit", {zakuwanie: zakuwanie, header: "Danmag-części i akcesoria motoryzacyjne | Edytowanie zakuwanie", currentUser: req.user});
+			let header = `Edytuj | Zakuwanie przewodów | Danmag-części i akcesoria motoryzacyjne`;
+			res.render("./zakuwanie/edit", {zakuwanie: zakuwanie, header: header});
 			
 			
 		}
@@ -150,8 +150,8 @@ router.get("/", function(req, res){
 		if(err) {
 			console.log(err);
 		} else {
-			
-			res.render("./zakuwanie/show", {zakuwanie: zakuwanie, header: "Danmag-części i akcesoria motoryzacyjne | " + zakuwanie.title, currentUser: req.user});
+			let header = `${zakuwanie[0].title} | Danmag-części i akcesoria motoryzacyjne`;
+			res.render("./zakuwanie/show", {zakuwanie: zakuwanie, header: header, currentUser: req.user});
 			
 			
 		}

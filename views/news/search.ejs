@@ -41,10 +41,18 @@
 													<div class="card-title info text-center">
 														<a href="/news/<%= news[i].more %>" style="color:#FBFA04"><%= news[i].title %></a> 
 													</div>
-														<p class="neutral"><%- news[i].opis %></p>
-														<% if(news[i].opis.length>200){ %>
+													<% if(news[i].opis.length>200){ %>
+														<% if(typeof news[i].more !== 'undefined'){ %>
+															<p class="neutral"><%- news[i].opis.substring(0,200) %>...</p>
 															<a href="/news/<%= news[i].more %>" class="form">Czytaj więcej...</a>
+														<% } else { %>
+															<p class="neutral"><%- news[i].opis.substring(0,200) %></p>
+															<a href="/news/<%= news[i]._id %>" class="form">Czytaj więcej...</a>
 														<% } %>
+								
+													<% } else { %>
+														<p class="neutral"><%- news[i].opis %></p>
+													<% } %>
 												</div>
 											</div>
 										</div>

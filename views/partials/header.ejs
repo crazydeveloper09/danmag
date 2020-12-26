@@ -120,15 +120,11 @@
         		<a class="nav-link" href="/news"><i class="fas fa-newspaper"></i> Aktualności</a>
       		</li>
 		<% } %>
-		<% if(typeof offer !== 'undefined'){ %>
+	
 			<li class="nav-item">
-        		<a class="nav-link" data-toggle="modal" data-target="#exampleModal" style="cursor:pointer;color:#FBFA04"><i class="far fa-question-circle"></i> Zapytaj o ofertę</a>
+        		<a class="nav-link" href="/offer/applications/new"><i class="far fa-question-circle"></i> Zapytaj o ofertę</a>
       		</li>
-		<% } else { %>
-			<li class="nav-item">
-				<a class="nav-link"  data-toggle="modal" data-target="#exampleModal" style="cursor:pointer"><i class="far fa-question-circle"></i> Zapytaj o ofertę</a>
-			</li>
-		<% } %>
+		
 		<% if(typeof currentUser !== 'undefined'){ %>
 			<li class="nav-item">
 				<div class="dropdown">
@@ -195,57 +191,4 @@
 		</div>
 	</div>
 	
-	<div class="modal fade"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-		  <div class="modal-content" style="background: #1a1a1a">
-			<div class="modal-header">
-			  <h5 class="modal-title info" id="exampleModalLabel">
-				  Podaj dokładne dane samochodu w poniższym formularzu
-				</h5>
-			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true" style="color: #FBFA04">&times;</span>
-			  </button>
-			</div>
-			<form action="/offer/applications" method="post">
-				<div class="modal-body">
-					<p class="info2"> Marka samochodu</p>
-					
-					<input type="text" name="brand" placeholder="np. Volkswagen" class="form-control" required>
-					
-					
-					<br>
-					<p class="info2">Model samochodu</p>
-					<input type="text" name="model" placeholder="np. Golf 3" class="form-control" required>
-					<br>
-					<p class="info2">Pojemność silnika</p>
-					<input type="text" name="engine" placeholder="np. 2.2 TDI" id="" class="form-control" required>
-					<br>
-					<p class="info2">Rodzaj silnika</p>
-					<select name="category" id="select" class="form-control" required>
-						<option style="color:black">Benzyna</option>
-						<option style="color:black">Diesel</option>
-					</select>
-					<br>
-					<p class="info2">Rok produkcji</p>
-					<input type="number" name="year" placeholder="np. 2010" class="form-control" required>
-					<br>
-					<p class="info2">Numer VIN</p>
-					<input type="text" name="vin" placeholder="np. LA2YZ23J9P4800003" maxlength="17" class="form-control" required>
-					<br>
-					<p class="info2">Rodzaj części</p>
-					<input type="text" name="part" placeholder="np. Płyn hamulcowy" class="form-control" required>
-					<br>
-					<p class="info2">Adres email na który chcesz otrzymać ofertę</p>
-					<input type="email" name="email" placeholder="np. jankowalski@gmail.com" class="form-control" required>
-					<br>
-					<input type="submit" value="Zapytaj o ofertę" class="form">
-					<button type="button" class="form-full" data-dismiss="modal">Zamknij</button>
-				</div>
-				
-				
-			</form>
-			
-			
-		  </div>
-		</div>
-	  </div>
+	
