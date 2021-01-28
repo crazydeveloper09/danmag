@@ -34,7 +34,7 @@ body {
 .info {
 	font-family: 'Nunito', sans-serif;
 	color: #FBFA04;
-	font-size: 25px;
+	font-size: 22px;
 	
 }
 #nav {
@@ -43,7 +43,7 @@ body {
 .info2 {
 	font-family: 'Nunito', sans-serif;
 	color: #FBFA04;
-	font-size: 19px;
+	font-size: 17px;
 	
 }
 #username,
@@ -118,7 +118,7 @@ input[type=time]::placeholder {
 .neutral {
 	font-family: 'Nunito', sans-serif;
 	color: white;
-	font-size: 19px;
+	font-size: 17px;
 }
 
 .nav-link {
@@ -129,7 +129,7 @@ input[type=time]::placeholder {
 .neutralb {
 	font-family: 'Nunito', sans-serif;
 	color: white;
-	font-size: 18px;
+	font-size: 17px;
 }
 .footer {
 	font-family: 'Nunito', sans-serif;
